@@ -12,10 +12,10 @@
           <!-- {% if user.is_authenticated %} -->
             <!-- <li class="nav-item">
               <div class="nav-link"><h5>@<em># #</em></h5></div>
-            </li>
-            <li class="nav-item">
-              <a class="btn btn-outline-warning" routerLink="/account/signout">Logout</a>
             </li> -->
+            <li class="nav-item">
+              <app-signout></app-signout>
+            </li>
           <!-- {% else %} -->
             <li class="nav-item">
               <a class="btn btn-outline-success" routerLink="/account/signin">Login</a>
@@ -67,7 +67,6 @@
       <div class="col-md-8">
         <!-- content body -->
         <router-outlet></router-outlet>
-
       </div>
       <!-- right panel -->
       <!-- {% if user.is_authenticated %} -->

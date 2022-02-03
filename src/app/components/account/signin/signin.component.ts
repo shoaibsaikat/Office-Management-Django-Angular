@@ -18,12 +18,10 @@ export class SigninComponent implements OnInit {
 
   login(form: NgForm): void {
     var user: SignIn = form.value;
-    console.log(user);
-
     this.accountService.logIn(user).subscribe({
       next: (v) => console.log(v),
-      error: (e) => console.error(e),
-      complete: () => console.info('complete')
+      // error: (e) => console.error(e),
+      // complete: () => console.info('logged in')
     });
   }
 
