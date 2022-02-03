@@ -37,7 +37,7 @@ export class AccountService {
     // Not Found: /accounts/login/
     // [03/Feb/2022 21:46:07] "GET /accounts/login/?next=/user/signout/ HTTP/1.1" 404 2442
 
-    return this.http.get<Message>(this.logOutUrl).pipe(
+    return this.http.post<Message>(this.logOutUrl, '').pipe(
       // tap(_ => this.log('logging out...')),
       catchError(this.handleError<Message>('log out'))
     );
