@@ -15,8 +15,13 @@ export class SignoutComponent implements OnInit {
 
   signout(): void  {
     this.accountService.logOut().subscribe({
-      next: (v) => console.log(v),
-      // complete: () => console.info('logged out')
+      next: (v) => {
+        console.log(v)
+      }, error: (e) => {
+        console.error(e);
+      }, complete: () => {
+        console.info('logged out');
+      }
     });
   }
 }

@@ -8,12 +8,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SigninComponent } from './components/account/signin/signin.component';
 import { SignoutComponent } from './components/account/signout/signout.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SigninComponent,
-    SignoutComponent
+    SignoutComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

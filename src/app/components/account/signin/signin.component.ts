@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 import { AccountService } from '../../../services/account/account.service';
 
 import { SignIn } from '../../../types/signin';
+import { User } from '../../../types/user';
 
 @Component({
   selector: 'app-signin',
@@ -11,17 +13,24 @@ import { SignIn } from '../../../types/signin';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
-  constructor(private accountService: AccountService) { }
+  private user?: User;
+  constructor(private accountService: AccountService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   login(form: NgForm): void {
-    var user: SignIn = form.value;
-    this.accountService.logIn(user).subscribe({
-      next: (v) => console.log(v),
-      // error: (e) => console.error(e),
-      // complete: () => console.info('logged in')
+    var logIn: SignIn = form.value;
+    this.accountService.logIn(logIn).subscribe({
+      next: (v) => {
+        this.user = v;
+        console.log(v);
+        this.router.navigate(['']);
+      }, error: (e) => {
+        console.error(e);
+      }, complete: () => {
+        console.info('logged in');
+      }
     });
   }
 
