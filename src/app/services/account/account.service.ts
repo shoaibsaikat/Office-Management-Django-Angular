@@ -28,9 +28,9 @@ export class AccountService {
 
   logOut(): Observable<Message> {
     // TODO: it's generating two calls, need to check why
-    // [03/Feb/2022 21:46:07] "GET /user/signout/ HTTP/1.1" 302 0
+    // [04/Feb/2022 15:48:37] "POST /user/signout/ HTTP/1.1" 302 0
     // Not Found: /accounts/login/
-    // [03/Feb/2022 21:46:07] "GET /accounts/login/?next=/user/signout/ HTTP/1.1" 404 2442
+    // [04/Feb/2022 15:48:37] "GET /accounts/login/?next=/user/signout/ HTTP/1.1" 404 2442
     return this.http.post<Message>(this.logOutUrl, '');
   }
 }
