@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
+import { AppComponent } from 'src/app/app.component';
+
 import { AccountService } from '../../../services/account/account.service';
 
 import { SignIn } from '../../../types/signin';
-import { User } from '../../../types/user';
 
 @Component({
   selector: 'app-signin',
@@ -13,8 +14,7 @@ import { User } from '../../../types/user';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
-  private user?: User;
-  constructor(private accountService: AccountService, private router: Router) { }
+  constructor(private appComponent: AppComponent, private accountService: AccountService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -23,8 +23,7 @@ export class SigninComponent implements OnInit {
     var logIn: SignIn = form.value;
     this.accountService.logIn(logIn).subscribe({
       next: (v) => {
-        this.user = v;
-        console.log(v);
+        this.appComponent.setCurrentUser(v);
         this.router.navigate(['']);
       }, error: (e) => {
         console.error(e);

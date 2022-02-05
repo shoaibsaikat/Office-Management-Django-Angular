@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
+import { AppComponent } from 'src/app/app.component';
+
 import { AccountService } from '../../../services/account/account.service';
 
 @Component({
@@ -8,7 +10,7 @@ import { AccountService } from '../../../services/account/account.service';
   styleUrls: ['./signout.component.css']
 })
 export class SignoutComponent implements OnInit {
-  constructor(private accountService: AccountService) { }
+  constructor(private appComponent: AppComponent, private accountService: AccountService) { }
 
   ngOnInit(): void {
   }
@@ -16,7 +18,7 @@ export class SignoutComponent implements OnInit {
   signout(): void  {
     this.accountService.logOut().subscribe({
       next: (v) => {
-        console.log(v)
+        this.appComponent.setCurrentUser(undefined);
       }, error: (e) => {
         console.error(e);
       }, complete: () => {

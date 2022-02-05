@@ -19,6 +19,11 @@ export class AccountService {
 
   constructor(private http: HttpClient) { }
 
+  getCurrentUser(): Observable<User> {
+    console.log('getting current user');
+    return this.http.get<User>(this.logInUrl);
+  }
+
   logIn(user: SignIn): Observable<User> {
     var formData = new FormData();
     formData.append('username', user.username);
