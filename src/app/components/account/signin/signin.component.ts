@@ -31,5 +31,9 @@ export class SigninComponent implements OnInit {
         console.info('logged in');
       }
     });
+    // NOTE: Similar approach
+    // subscribe(data => {
+    //   console.log(data);
+    // });
   }
 }
