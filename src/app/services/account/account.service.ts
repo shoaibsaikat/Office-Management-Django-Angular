@@ -4,6 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
+import { AppComponent } from 'src/app/app.component';
+
 import { User } from '../../types/user';
 import { SignIn } from '../../types/signin';
 import { Message } from '../../types/message';
@@ -12,6 +14,7 @@ import { Message } from '../../types/message';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AccountService {
   private baseUrl: string = 'http://127.0.0.1:8000/user/';
   private logInUrl: string = this.baseUrl.concat('signin/');
@@ -28,6 +31,6 @@ export class AccountService {
   }
 
   logOut(): Observable<Message> {
-    return this.http.post<Message>(this.logOutUrl, null);
+    return this.http.post<Message>(this.logOutUrl, null, AppComponent.getHttpHeader());
   }
 }

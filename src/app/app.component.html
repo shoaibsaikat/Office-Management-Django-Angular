@@ -7,21 +7,17 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto"><li class="nav-item active"><a class="nav-link" href="#"></a></li></ul>
+        <ul class="navbar-nav me-auto"></ul>
         <ul class="navbar-nav" style="margin-right: 1em;">
-          <span *ngIf="user" >
-            <li class="nav-item">
-              <div class="nav-link"><h5>@<em>{{user.first_name}} {{user.last_name}}</em></h5></div>
-            </li>
-            <li class="nav-item">
-              <app-signout></app-signout>
-            </li>
-          </span>
-
-          <li *ngIf="!user" class="nav-item">
+          <li class="nav-item" *ngIf="user.token">
+            <div class="nav-link"><h5>@<em>{{user.first_name}} {{user.last_name}}</em></h5></div>
+          </li>
+          <li class="nav-item" *ngIf="user.token">
+            <app-signout></app-signout>
+          </li>
+          <li class="nav-item" *ngIf="!user.token">
             <a class="btn btn-outline-success" routerLink="/account/signin">Login</a>
           </li>
-
         </ul>
       </div>
     </nav>
