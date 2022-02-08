@@ -16,14 +16,9 @@ export class SignoutComponent implements OnInit {
   }
 
   signout(): void  {
-    this.accountService.logOut().subscribe({
-      next: (v) => {
-        this.appComponent.setCurrentUser(this.appComponent.getEmptyUser());
-      }, error: (e) => {
-        console.error(e);
-      }, complete: () => {
-        console.info('logged out');
-      }
+    this.accountService.logOut().subscribe(data => {
+      console.log(data);
     });
+    this.appComponent.setCurrentUser(this.appComponent.getEmptyUser());
   }
 }

@@ -33,4 +33,12 @@ export class AccountService {
   logOut(): Observable<Message> {
     return this.http.post<Message>(this.logOutUrl, null, AppComponent.getHttpHeader());
   }
+
+  changeInfo(user: User): Observable<Message> {
+    var formData = new FormData();
+    formData.append('first_name', user.first_name);
+    formData.append('last_name', user.last_name);
+    formData.append('email', user.email || '');
+    return this.http.post<Message>(this.profileUrl, formData, AppComponent.getHttpHeader());
+  }
 }
