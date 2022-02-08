@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit {
       'id': 0,
       'username': '',
       'first_name': this.profileForm.value.firstName,
-      'last_name': this.profileForm.value.last_name,
+      'last_name': this.profileForm.value.lastName,
       'email': this.profileForm.value.email,
     }
 

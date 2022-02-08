@@ -35,10 +35,10 @@ export class AccountService {
   }
 
   changeInfo(user: User): Observable<Message> {
-    var formData = new FormData();
-    formData.append('first_name', user.first_name);
-    formData.append('last_name', user.last_name);
-    formData.append('email', user.email || '');
-    return this.http.post<Message>(this.profileUrl, formData, AppComponent.getHttpHeader());
+    return this.http.post<Message>(this.profileUrl, {
+      first_name: user.first_name,
+      last_name: user.last_name,
+      email: user.email || '',
+    }, AppComponent.getHttpHeader());
   }
 }
