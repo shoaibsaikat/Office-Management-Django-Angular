@@ -40,7 +40,11 @@ export class ProfileComponent implements OnInit {
     }
 
     this.accountService.changeInfo(user).subscribe(data =>  {
-      console.log(data);
+      console.log('ProfileComponent: ' + data.detail);
+      this.appComponent.user.first_name = user.first_name;
+      this.appComponent.user.last_name = user.last_name;
+      this.appComponent.user.email = user.email;
+      this.appComponent.saveCurrentUser();
     });
   }
 }

@@ -31,11 +31,22 @@ export class AppComponent {
       first_name: '',
       last_name: '',
       username: '',
-    }
+    };
   }
 
-  setCurrentUser(user: User): void {
-    this.user = user;
+  saveEmptyUser(): void {
+    this.user.id = -1;
+    this.user.username = '';
+    this.user.first_name = '';
+    this.user.last_name = '';
+    this.user.email = undefined;
+    this.user.manager_id = undefined;
+    this.user.token = undefined;
+    this.saveCurrentUser();
+    console.log('AppComponent: ' + this.user.id + ' : ' + this.user.username);
+  }
+
+  saveCurrentUser(): void {
     if (this.user) {
       localStorage.setItem('user_id', this.user.id.toString());
       localStorage.setItem('username', this.user.username);
@@ -45,7 +56,7 @@ export class AppComponent {
     } else {
       localStorage.setItem('token', '');
     }
-    console.log(this.user);
+    console.log('AppComponent: ' + this.user.id + ' : ' + this.user.username);
   }
 
   static getHttpHeader() {

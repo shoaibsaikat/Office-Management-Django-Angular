@@ -27,9 +27,9 @@
   <div class="container card bg-light bg-opacity-50">
     <br>
     <div class="row">
-      <!-- left panel -->
-      <!-- {% if user.is_authenticated %} -->
-        <div class="col-md-2">
+      <!-- start: left pane -->
+      <div class="col-md-2">
+        <span *ngIf="user.token">
           <!-- user info change -->
           <div class="card bg-light">
             <div class="card-header bg-info bg-opacity-50"><strong>My Account</strong></div>
@@ -56,18 +56,16 @@
               </div>
             </div>
           </div>
-        </div>
-      <!-- {% else %} -->
-        <!-- emplty place to render UI correctly -->
-        <!-- <div class="col-md-2"></div> -->
-      <!-- {% endif %} -->
+        </span>
+      </div>
+      <!-- end: left pane -->
+      <!-- content body -->
       <div class="col-md-8">
-        <!-- content body -->
         <router-outlet></router-outlet>
       </div>
-      <!-- right panel -->
-      <!-- {% if user.is_authenticated %} -->
-        <div class="col-md-2" style="text-align: left;">
+      <!-- start: right pane -->
+      <div class="col-md-2" style="text-align: left;">
+        <span *ngIf="user.token">
           <!-- inventory -->
           <div class="card bg-light">
             <div class="card-header bg-info bg-opacity-50"><strong>Inventory Management</strong></div>
@@ -107,9 +105,10 @@
               </div>
             </div>
           </div>
-          <br>
-        </div>
-      <!-- {% endif %} -->
+        </span>
+        <br>
+      </div>
+      <!-- end: right pane -->
     </div>
     <br>
     <div class="card bg-warning bg-opacity-10">
