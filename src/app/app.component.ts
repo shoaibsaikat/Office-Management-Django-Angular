@@ -13,8 +13,6 @@ export class AppComponent {
   title = 'Office Management';
   user: User = this.getEmptyUser();
 
-  timeLeft: number = 60;
-
   constructor() {}
 
   ngOnInit(): void {
@@ -23,6 +21,7 @@ export class AppComponent {
     this.user.first_name = localStorage.getItem('first_name') || '';
     this.user.last_name = localStorage.getItem('last_name') || '';
     this.user.token = localStorage.getItem('token') || undefined;
+    this.user.manager_id = Number(localStorage.getItem('manager_id')) || -1;
   }
 
   getEmptyUser() {
@@ -53,6 +52,7 @@ export class AppComponent {
       localStorage.setItem('first_name', this.user.first_name);
       localStorage.setItem('last_name', this.user.last_name);
       localStorage.setItem('token', this.user?.token ? this.user.token : '');
+      localStorage.setItem('manager_id', this.user.manager_id?.toString() || '-1');
     } else {
       localStorage.setItem('token', '');
     }

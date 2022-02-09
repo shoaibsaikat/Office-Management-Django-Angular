@@ -21,10 +21,10 @@ export class SigninComponent implements OnInit {
   }
 
   login(form: NgForm): void {
-    var logIn: SignIn = form.value;
+    let logIn: SignIn = form.value;
     this.accountService.logIn(logIn).subscribe({
       next: (v) => {
-        var user: User = v;
+        let user: User = v;
         this.appComponent.user.id = user.id;
         this.appComponent.user.username = user.username;
         this.appComponent.user.first_name = user.first_name;

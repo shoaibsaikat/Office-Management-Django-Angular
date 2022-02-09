@@ -20,6 +20,7 @@ export class AccountService {
   private logInUrl: string = this.baseUrl.concat('signin/');
   private logOutUrl: string = this.baseUrl.concat('signout/');
   private profileUrl: string = this.baseUrl.concat('info/');
+  private managerUrl: string = this.baseUrl.concat('change_manager/');
 
   constructor(private http: HttpClient) { }
 
@@ -39,6 +40,16 @@ export class AccountService {
       first_name: user.first_name,
       last_name: user.last_name,
       email: user.email || '',
+    }, AppComponent.getHttpHeader());
+  }
+
+  getMangerList(): Observable<string> {
+    return this.http.get<string>(this.managerUrl, AppComponent.getHttpHeader());
+  }
+
+  setManger(id: number): Observable<string> {
+    return this.http.post<string>(this.managerUrl, {
+      manager: id,
     }, AppComponent.getHttpHeader());
   }
 }

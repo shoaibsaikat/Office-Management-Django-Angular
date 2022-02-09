@@ -13,6 +13,7 @@ import { User } from 'src/app/types/user';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
+
 export class ProfileComponent implements OnInit {
   user?:User;
   profileForm = new FormGroup({
@@ -31,7 +32,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    var user = {
+    let user = {
       'id': 0,
       'username': '',
       'first_name': this.profileForm.value.firstName,
