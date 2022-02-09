@@ -16,7 +16,7 @@ import { User } from 'src/app/types/user';
 export class ManagerComponent implements OnInit {
   managerList: User[] = [];
   managerForm = new FormGroup({
-    manager: new FormControl(''),
+    manager: new FormControl(),
   });
   currentManger: number = -1;
 
@@ -25,7 +25,7 @@ export class ManagerComponent implements OnInit {
   ngOnInit(): void {
     this.getMangerList();
     this.currentManger = this.appComponent.user.manager_id || -1;
-    console.log('ManagerComponent: ' + this.currentManger);
+    // console.log('ManagerComponent: current ' + this.currentManger);
   }
 
   getMangerList(): void {
@@ -36,7 +36,7 @@ export class ManagerComponent implements OnInit {
         objList.forEach(element => {
           if (element && element.id != this.currentManger) {
             this.managerList.push(element);
-            // console.log('ManagerComponent: ' + element);
+            // console.log('ManagerComponent: id ' + element.id + ' '  + element.first_name);
           }
         });
       }
@@ -44,7 +44,7 @@ export class ManagerComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('ManagerComponent: ' + this.managerForm.value.manager);
+    // console.log('ManagerComponent: selected ' + this.managerForm.value.manager);
     this.accountService.setManger(this.managerForm.value.manager).subscribe(data => {
       // console.log('ManagerComponent: ' + data);
       this.appComponent.user.manager_id = this.managerForm.value.manager;

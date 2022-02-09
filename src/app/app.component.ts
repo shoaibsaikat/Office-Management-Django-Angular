@@ -42,7 +42,7 @@ export class AppComponent {
     this.user.manager_id = undefined;
     this.user.token = undefined;
     this.saveCurrentUser();
-    console.log('AppComponent: ' + this.user.id + ' : ' + this.user.username);
+    // console.log('AppComponent: ' + this.user.id + ' : ' + this.user.username);
   }
 
   saveCurrentUser(): void {
@@ -56,7 +56,7 @@ export class AppComponent {
     } else {
       localStorage.setItem('token', '');
     }
-    console.log('AppComponent: ' + this.user.id + ' : ' + this.user.username);
+    // console.log('AppComponent: ' + this.user.id + ' : ' + this.user.username);
   }
 
   static getHttpHeader() {
