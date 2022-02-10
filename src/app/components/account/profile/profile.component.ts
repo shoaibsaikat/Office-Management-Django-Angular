@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
     this.profileForm.controls.email.setValue(this.user.email);
   }
 
-  onSubmit() {
+  onSubmit(): void {
     let user = {
       'id': 0,
       'username': '',
@@ -46,6 +46,7 @@ export class ProfileComponent implements OnInit {
       this.appComponent.user.last_name = user.last_name;
       this.appComponent.user.email = user.email;
       this.appComponent.saveCurrentUser();
+      this.router.navigate(['']);
     });
   }
 }

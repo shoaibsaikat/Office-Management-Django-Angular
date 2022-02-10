@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+
 import { AppComponent } from 'src/app/app.component';
 
 import { AccountService } from '../../../services/account/account.service';
@@ -20,7 +22,7 @@ export class ManagerComponent implements OnInit {
   });
   currentManger: number = -1;
 
-  constructor(private appComponent: AppComponent, private accountService: AccountService) { }
+  constructor(private appComponent: AppComponent, private accountService: AccountService, private router: Router) { }
 
   ngOnInit(): void {
     this.getMangerList();
@@ -43,13 +45,14 @@ export class ManagerComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
     // console.log('ManagerComponent: selected ' + this.managerForm.value.manager);
     this.accountService.setManger(this.managerForm.value.manager).subscribe(data => {
-      // console.log('ManagerComponent: ' + data);
+      // console.log('ManagerComponent: ' + data.detail);
       this.appComponent.user.manager_id = this.managerForm.value.manager;
       this.appComponent.saveCurrentUser();
       this.currentManger = this.managerForm.value.manager;
+      this.router.navigate(['']);
     });
   }
 }

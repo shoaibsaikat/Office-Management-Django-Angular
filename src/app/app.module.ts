@@ -11,6 +11,7 @@ import { SignoutComponent } from './components/account/signout/signout.component
 import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/account/profile/profile.component';
 import { ManagerComponent } from './components/account/manager/manager.component';
+import { PasswordComponent } from './components/account/password/password.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ManagerComponent } from './components/account/manager/manager.component
     SignoutComponent,
     HomeComponent,
     ProfileComponent,
-    ManagerComponent
+    ManagerComponent,
+    PasswordComponent
   ],
   imports: [
     BrowserModule,
