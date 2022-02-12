@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { AppComponent } from 'src/app/app.component';
 
@@ -17,9 +17,9 @@ import { User } from 'src/app/types/user';
 export class ProfileComponent implements OnInit {
   user?:User;
   profileForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    email: new FormControl(''),
+    firstName: new FormControl('', Validators.required),
+    lastName: new FormControl('', Validators.required),
+    email: new FormControl('', Validators.email),
   });
 
   constructor(private appComponent: AppComponent, private accountService: AccountService, private router: Router) { }

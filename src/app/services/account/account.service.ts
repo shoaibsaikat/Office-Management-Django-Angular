@@ -19,9 +19,9 @@ export class AccountService {
   private baseUrl: string = 'http://127.0.0.1:8000/user/';
   private logInUrl: string = this.baseUrl.concat('signin/');
   private logOutUrl: string = this.baseUrl.concat('signout/');
-  private profileUrl: string = this.baseUrl.concat('info/');
+  private profileUrl: string = this.baseUrl.concat('change_profile/');
   private managerUrl: string = this.baseUrl.concat('change_manager/');
-  private passwordUrl: string = this.baseUrl.concat('change/');
+  private passwordUrl: string = this.baseUrl.concat('chnage_password/');
 
   constructor(private http: HttpClient) { }
 
