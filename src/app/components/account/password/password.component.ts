@@ -16,10 +16,13 @@ import { Message } from 'src/app/types/message';
 })
 export class PasswordComponent implements OnInit {
   passwordForm = new FormGroup({
-    oldPassword: new FormControl('', Validators.required),
-    newPassword1: new FormControl('', Validators.required),
-    newPassword2: new FormControl('', Validators.required),
+    oldPassword: new FormControl('', [Validators.required, ]),
+    newPassword1: new FormControl('', [Validators.required, ]),
+    newPassword2: new FormControl('', [Validators.required, ]),
   });
+  get oldPassword() { return this.passwordForm.get('oldPassword'); }
+  get newPassword1() { return this.passwordForm.get('newPassword1'); }
+  get newPassword2() { return this.passwordForm.get('newPassword2'); }
 
   constructor(private appComponent: AppComponent, private accountService: AccountService, private router: Router) { }
 
@@ -27,6 +30,10 @@ export class PasswordComponent implements OnInit {
   }
 
   onSubmit(): void {
+    if (this.oldPassword?.errors || this.newPassword1?.errors || this.newPassword2?.errors) {
+      return;
+    }
+
     this.accountService.setPassword(this.passwordForm.value.oldPassword, this.passwordForm.value.newPassword1).subscribe(data =>  {
       // console.log('PasswordComponent: ' + data.detail);
       this.router.navigate(['']);

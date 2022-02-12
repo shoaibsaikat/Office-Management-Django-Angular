@@ -15,23 +15,30 @@ import { User } from 'src/app/types/user';
 })
 
 export class ProfileComponent implements OnInit {
-  user?:User;
-  profileForm = new FormGroup({
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.email),
+  user: User = this.appComponent.user;
+  profileForm: FormGroup = new FormGroup({
+    firstName: new FormControl('', [Validators.required, ]),
+    lastName: new FormControl('', [Validators.required, ]),
+    email: new FormControl('', [Validators.email, ]),
   });
+  // get is not mandatory, it's for less code, if get is not added in that case from html we can get FormControl by using, profileForm.get('')
+  get firstName() { return this.profileForm.get('firstName'); }
+  get lastName() { return this.profileForm.get('lastName'); }
+  get email() { return this.profileForm.get('email'); }
 
   constructor(private appComponent: AppComponent, private accountService: AccountService, private router: Router) { }
 
   ngOnInit(): void {
-    this.user = this.appComponent.user;
-    this.profileForm.controls.firstName.setValue(this.user.first_name);
-    this.profileForm.controls.lastName.setValue(this.user.last_name);
-    this.profileForm.controls.email.setValue(this.user.email);
+    this.firstName?.setValue(this.user.first_name);
+    this.lastName?.setValue(this.user.last_name);
+    this.email?.setValue(this.user.email);
   }
 
   onSubmit(): void {
+    if (this.firstName?.errors || this.lastName?.errors || this.email?.errors) {
+      return;
+    }
+
     let user = {
       'id': 0,
       'username': '',
