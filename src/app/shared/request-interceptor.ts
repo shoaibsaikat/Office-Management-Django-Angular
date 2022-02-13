@@ -25,8 +25,14 @@ export class RequestInterceptor implements HttpInterceptor {
             if (error instanceof HttpErrorResponse) {
               let msg: Message = JSON.parse(JSON.stringify(error.error));
               this.messageService.clearError();
-              this.messageService.addError(msg.detail);
-              // console.log('RequestInterceptor: ' +  msg.detail);
+              let msgDetail: string = msg.detail || '';
+              if (msg.detail && msg.detail.length > 0) {
+                this.messageService.addError(msg.detail);
+                // console.log('RequestInterceptor: ' +  msg.detail);
+              } else {
+                // system error
+                this.messageService.addError(error.status + ': ' + error.name + ', ' + error.statusText);
+              }
             }
           }
         }),

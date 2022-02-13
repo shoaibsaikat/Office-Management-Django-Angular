@@ -17,21 +17,31 @@ export class AssetService {
 
   private baseUrl: string = this.common.getBaseUrl().concat('asset/');
   private myListUrl: string = this.baseUrl.concat('my_list/?page=1');
+  private allListUrl: string = this.baseUrl.concat('list/?page=1');
+  private addUrl: string = this.baseUrl.concat('add/');
+  private pendingUrl: string = this.baseUrl.concat('my_pending_list/');
+  private editUrl: string = this.baseUrl.concat('edit/');
 
   constructor(private http: HttpClient) { }
 
-  getMyAssetList() {
-    this.http.get<string>(this.myListUrl, this.common.getHttpHeader()).subscribe({
-      next: (v) => {
-        // console.log(JSON.stringify(v));
-        let objUserList: User[] = JSON.parse(JSON.parse(JSON.stringify(v)).user_list);
-        let objAssetList: Asset[] = JSON.parse(JSON.parse(JSON.stringify(v)).asset_list);
+  getMyAssetList(): Observable<string> {
+    return this.http.get<string>(this.myListUrl, this.common.getHttpHeader());
+  }
 
-        objAssetList.forEach(element => {
-            console.log('AssetService: id ' + element.id + ' '  + element.name + ' : ' + element.user);
-        });
-      }
-    });
+  getAllAssetList(): Observable<string> {
+    return this.http.get<string>(this.allListUrl, this.common.getHttpHeader());
+  }
+
+  getPendingAssetList(): Observable<string> {
+    return this.http.get<string>(this.pendingUrl, this.common.getHttpHeader());
+  }
+
+  getAddInfo(): Observable<string> {
+    return this.http.get<string>(this.addUrl, this.common.getHttpHeader());
+  }
+
+  getEditInfo(): Observable<string> {
+    return this.http.get<string>(this.editUrl, this.common.getHttpHeader());
   }
 
 }

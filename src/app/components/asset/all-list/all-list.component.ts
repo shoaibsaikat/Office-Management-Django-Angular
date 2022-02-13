@@ -2,19 +2,15 @@ import { Component, OnInit } from '@angular/core';
 
 import { AssetService } from 'src/app/services/asset/asset.service';
 
-import { User } from '../../../shared/types/user';
-import { Message } from '../../../shared/types/message';
-import { Common } from '../../../shared/common';
 import { Asset } from 'src/app/shared/types/asset';
 
 @Component({
-  selector: 'app-my-list',
-  templateUrl: './my-list.component.html',
-  styleUrls: ['./my-list.component.css']
+  selector: 'app-all-list',
+  templateUrl: './all-list.component.html',
+  styleUrls: ['./all-list.component.css']
 })
-export class MyListComponent implements OnInit {
+export class AllListComponent implements OnInit {
 
-  userList: User[] = [];
   assetList: Asset[] = [];
 
   constructor(private assetService: AssetService) { }
@@ -23,7 +19,6 @@ export class MyListComponent implements OnInit {
     this.assetService.getMyAssetList().subscribe({
       next: (v) => {
         // console.log('MyListComponent: ' + JSON.stringify(v));
-        let objUserList: User[] = JSON.parse(JSON.parse(JSON.stringify(v)).user_list);
         let objAssetList: Asset[] = JSON.parse(JSON.parse(JSON.stringify(v)).asset_list);
 
         objAssetList.forEach(element => {
@@ -32,18 +27,8 @@ export class MyListComponent implements OnInit {
             // console.log('MyListComponent: id ' + element.id + ' '  + element.name + ' : ' + element.user);
           }
         });
-
-        objUserList.forEach(element => {
-          if (element) {
-            this.userList.push(element);
-          }
-        });
       }
     });
-  }
-
-  onSubmit(item: number): void {
-    // console.log('MyListComponent: ' + item + ' clicked');
   }
 
 }

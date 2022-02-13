@@ -4,7 +4,7 @@
             <select class="form-select" formControlName="manager">
                 <option value="" disabled>Choose your manager</option>
                 <option *ngFor="let man of managerList" [ngValue]="man.id">{{man.first_name}} {{man.last_name}}</option>
-             </select>
+            </select>
         </div>
         <!-- managerForm.get('manager') is never null or undefined, need to check why -->
         <button type="submit" class="btn btn-primary" [disabled]="!managerForm.get('manager') || !managerForm.get('manager')?.value">Save</button>

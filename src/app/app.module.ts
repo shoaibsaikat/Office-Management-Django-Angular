@@ -14,6 +14,10 @@ import { ManagerComponent } from './components/account/manager/manager.component
 import { PasswordComponent } from './components/account/password/password.component';
 import { MessageComponent } from './components/message/message.component';
 import { MyListComponent } from './components/asset/my-list/my-list.component';
+import { AllListComponent } from './components/asset/all-list/all-list.component';
+import { PendingListComponent } from './components/asset/pending-list/pending-list.component';
+import { CreateComponent } from './components/asset/create/create.component';
+import { EditComponent } from './components/asset/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,11 @@ import { MyListComponent } from './components/asset/my-list/my-list.component';
     ManagerComponent,
     PasswordComponent,
     MessageComponent,
-    MyListComponent
+    MyListComponent,
+    AllListComponent,
+    PendingListComponent,
+    CreateComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,
