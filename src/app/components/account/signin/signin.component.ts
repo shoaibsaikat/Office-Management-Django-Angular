@@ -15,6 +15,7 @@ import { User } from 'src/app/types/user';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
+
   constructor(private appComponent: AppComponent, private accountService: AccountService, private router: Router) { }
 
   ngOnInit(): void {
@@ -37,4 +38,5 @@ export class SigninComponent implements OnInit {
       }
     });
   }
+
 }

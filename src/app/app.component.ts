@@ -12,6 +12,7 @@ import { User } from './types/user';
 export class AppComponent {
   title = 'Office Management';
   user: User = this.getEmptyUser();
+  errorMsg: string = '';
 
   constructor() {}
 
@@ -65,5 +66,9 @@ export class AppComponent {
       'Content-Type':  'application/json',
       'Authorization': 'Token ' + localStorage.getItem('token')
     })}
+  }
+
+  setError(msg: string): void {
+    this.errorMsg = msg;
   }
 }

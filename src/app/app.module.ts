@@ -12,6 +12,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/account/profile/profile.component';
 import { ManagerComponent } from './components/account/manager/manager.component';
 import { PasswordComponent } from './components/account/password/password.component';
+import { MessageComponent } from './components/message/message.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { PasswordComponent } from './components/account/password/password.compon
     HomeComponent,
     ProfileComponent,
     ManagerComponent,
-    PasswordComponent
+    PasswordComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,7 @@ import { AccountService } from '../../../services/account/account.service';
   styleUrls: ['./signout.component.css']
 })
 export class SignoutComponent implements OnInit {
+
   constructor(private appComponent: AppComponent, private accountService: AccountService, private router: Router) { }
 
   ngOnInit(): void {
@@ -23,4 +24,5 @@ export class SignoutComponent implements OnInit {
     });
     this.appComponent.saveEmptyUser();
   }
+
 }

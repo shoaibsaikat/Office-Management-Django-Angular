@@ -21,7 +21,7 @@ export class AccountService {
   private logOutUrl: string = this.baseUrl.concat('signout/');
   private profileUrl: string = this.baseUrl.concat('change_profile/');
   private managerUrl: string = this.baseUrl.concat('change_manager/');
-  private passwordUrl: string = this.baseUrl.concat('chnage_password/');
+  private passwordUrl: string = this.baseUrl.concat('change_password/');
 
   constructor(private http: HttpClient) { }
 
@@ -60,4 +60,5 @@ export class AccountService {
       newpassword: new_pass,
     }, AppComponent.getHttpHeader());
   }
+
 }

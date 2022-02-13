@@ -15,12 +15,13 @@ import { Message } from 'src/app/types/message';
   styleUrls: ['./password.component.css']
 })
 export class PasswordComponent implements OnInit {
+
   passwordForm = new FormGroup({
-    oldPassword: new FormControl('', [ Validators.required, ]),
-    newPassword1: new FormControl('', [ Validators.required, ]),
-    newPassword2: new FormControl('', [ Validators.required, ]),
+    oldPassword: new FormControl('', [Validators.required]),
+    newPassword1: new FormControl('', [Validators.required]),
+    newPassword2: new FormControl('', [Validators.required]),
   }, {
-    validators: [ this.passwordMatchValidation(), ],
+    validators: [this.passwordMatchValidation()],
   });
   get oldPassword() { return this.passwordForm.get('oldPassword'); }
   get newPassword1() { return this.passwordForm.get('newPassword1'); }
@@ -54,4 +55,5 @@ export class PasswordComponent implements OnInit {
       return null;
     };
   }
+
 }

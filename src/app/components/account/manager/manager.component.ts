@@ -16,6 +16,7 @@ import { User } from 'src/app/types/user';
 })
 
 export class ManagerComponent implements OnInit {
+
   managerList: User[] = [];
   managerForm = new FormGroup({
     manager: new FormControl(),
@@ -55,4 +56,5 @@ export class ManagerComponent implements OnInit {
       this.router.navigate(['']);
     });
   }
+
 }
