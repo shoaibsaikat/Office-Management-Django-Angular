@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, FormControl, FormArray, ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
 
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
@@ -16,9 +16,11 @@ import { Message } from 'src/app/types/message';
 })
 export class PasswordComponent implements OnInit {
   passwordForm = new FormGroup({
-    oldPassword: new FormControl('', [Validators.required, ]),
-    newPassword1: new FormControl('', [Validators.required, ]),
-    newPassword2: new FormControl('', [Validators.required, ]),
+    oldPassword: new FormControl('', [ Validators.required, ]),
+    newPassword1: new FormControl('', [ Validators.required, ]),
+    newPassword2: new FormControl('', [ Validators.required, ]),
+  }, {
+    validators: [ this.passwordMatchValidation(), ],
   });
   get oldPassword() { return this.passwordForm.get('oldPassword'); }
   get newPassword1() { return this.passwordForm.get('newPassword1'); }
@@ -40,4 +42,16 @@ export class PasswordComponent implements OnInit {
     });
   }
 
+  passwordMatchValidation(): ValidatorFn {
+    return (control:AbstractControl): ValidationErrors | null => {
+      if (!this.passwordForm || !this.passwordForm.get('newPassword1') || !this.passwordForm.get('newPassword2')) {
+        return null;
+      }
+
+      if (this.passwordForm.get('newPassword1')?.value != this.passwordForm.get('newPassword2')?.value) {
+        return { noMatch: true };
+      }
+      return null;
+    };
+  }
 }
