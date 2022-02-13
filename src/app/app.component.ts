@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+
 import { User } from './types/user';
 
 @Component({
@@ -14,7 +16,7 @@ export class AppComponent {
   user: User = this.getEmptyUser();
   errorMsg: string = '';
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.user.id = Number(localStorage.getItem('user_id')) || -1;
@@ -60,15 +62,12 @@ export class AppComponent {
     // console.log('AppComponent: ' + this.user.id + ' : ' + this.user.username);
   }
 
-  static getHttpHeader() {
-    return {
-      headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Authorization': 'Token ' + localStorage.getItem('token')
-    })}
-  }
-
   setError(msg: string): void {
     this.errorMsg = msg;
   }
+
+  navigate(path: string): void {
+    this.router.navigate([path]);
+  }
+
 }

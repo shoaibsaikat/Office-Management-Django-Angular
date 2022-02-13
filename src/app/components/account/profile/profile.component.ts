@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { AppComponent } from 'src/app/app.component';
@@ -26,7 +25,7 @@ export class ProfileComponent implements OnInit {
   get lastName() { return this.profileForm.get('lastName'); }
   get email() { return this.profileForm.get('email'); }
 
-  constructor(private appComponent: AppComponent, private accountService: AccountService, private router: Router) { }
+  constructor(private appComponent: AppComponent, private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.firstName?.setValue(this.user.first_name);
@@ -39,12 +38,16 @@ export class ProfileComponent implements OnInit {
       return;
     }
 
+    let first: string = this.profileForm.value.firstName || '';
+    let last: string = this.profileForm.value.lastName || '';
+    let email: string = this.profileForm.value.email || '';
+
     let user = {
       'id': 0,
       'username': '',
-      'first_name': this.profileForm.value.firstName,
-      'last_name': this.profileForm.value.lastName,
-      'email': this.profileForm.value.email,
+      'first_name': first.trim(),
+      'last_name': last.trim(),
+      'email': email.trim(),
     }
 
     this.accountService.changeInfo(user).subscribe(data =>  {
@@ -53,7 +56,7 @@ export class ProfileComponent implements OnInit {
       this.appComponent.user.last_name = user.last_name;
       this.appComponent.user.email = user.email;
       this.appComponent.saveCurrentUser();
-      this.router.navigate(['']);
+      this.appComponent.navigate('');
     });
   }
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 import { AppComponent } from 'src/app/app.component';
 
@@ -16,7 +15,7 @@ import { User } from 'src/app/types/user';
 })
 export class SigninComponent implements OnInit {
 
-  constructor(private appComponent: AppComponent, private accountService: AccountService, private router: Router) { }
+  constructor(private appComponent: AppComponent, private accountService: AccountService) { }
 
   ngOnInit(): void {
   }
@@ -34,7 +33,7 @@ export class SigninComponent implements OnInit {
         this.appComponent.user.manager_id = user.manager_id;
         this.appComponent.user.token = user.token;
         this.appComponent.saveCurrentUser();
-        this.router.navigate(['']);
+        this.appComponent.navigate('');
       }
     });
   }

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-
 import { AppComponent } from 'src/app/app.component';
 
 import { AccountService } from '../../../services/account/account.service';
@@ -23,7 +21,7 @@ export class ManagerComponent implements OnInit {
   });
   currentManger: number = -1;
 
-  constructor(private appComponent: AppComponent, private accountService: AccountService, private router: Router) { }
+  constructor(private appComponent: AppComponent, private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.getMangerList();
@@ -53,7 +51,7 @@ export class ManagerComponent implements OnInit {
       this.appComponent.user.manager_id = this.managerForm.value.manager;
       this.appComponent.saveCurrentUser();
       this.currentManger = this.managerForm.value.manager;
-      this.router.navigate(['']);
+      this.appComponent.navigate('');
     });
   }
 
