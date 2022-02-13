@@ -5,7 +5,7 @@ import { AppComponent } from 'src/app/app.component';
 
 import { AccountService } from 'src/app/services/account/account.service';
 
-import { User } from 'src/app/types/user';
+import { User } from 'src/app/shared/types/user';
 
 @Component({
   selector: 'app-profile',
@@ -51,7 +51,7 @@ export class ProfileComponent implements OnInit {
     }
 
     this.accountService.changeInfo(user).subscribe(data =>  {
-      console.log('ProfileComponent: ' + data.detail);
+      // console.log('ProfileComponent: ' + data.detail);
       this.appComponent.user.first_name = user.first_name;
       this.appComponent.user.last_name = user.last_name;
       this.appComponent.user.email = user.email;

@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { RequestInterceptor } from './request-interceptor';
+import { RequestInterceptor } from './shared/request-interceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SigninComponent } from './components/account/signin/signin.component';
@@ -13,6 +13,7 @@ import { ProfileComponent } from './components/account/profile/profile.component
 import { ManagerComponent } from './components/account/manager/manager.component';
 import { PasswordComponent } from './components/account/password/password.component';
 import { MessageComponent } from './components/message/message.component';
+import { MyListComponent } from './components/asset/my-list/my-list.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MessageComponent } from './components/message/message.component';
     ProfileComponent,
     ManagerComponent,
     PasswordComponent,
-    MessageComponent
+    MessageComponent,
+    MyListComponent
   ],
   imports: [
     BrowserModule,

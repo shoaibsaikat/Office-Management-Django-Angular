@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 import { Message } from './types/message';
 
-import { MessageService } from './services/message/message.service';
+import { MessageService } from '../services/message/message.service';
 
 @Injectable({
   providedIn: 'root',

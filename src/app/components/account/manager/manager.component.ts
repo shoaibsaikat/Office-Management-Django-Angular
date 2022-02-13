@@ -5,7 +5,7 @@ import { AppComponent } from 'src/app/app.component';
 
 import { AccountService } from '../../../services/account/account.service';
 
-import { User } from 'src/app/types/user';
+import { User } from 'src/app/shared/types/user';
 
 @Component({
   selector: 'app-manager',

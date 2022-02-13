@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
-import { User } from './types/user';
+import { User } from './shared/types/user';
 
 @Component({
   selector: 'app-root',

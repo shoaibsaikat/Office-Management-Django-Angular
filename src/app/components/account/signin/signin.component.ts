@@ -5,8 +5,8 @@ import { AppComponent } from 'src/app/app.component';
 
 import { AccountService } from '../../../services/account/account.service';
 
-import { SignIn } from '../../../types/signin';
-import { User } from 'src/app/types/user';
+import { SignIn } from '../../../shared/types/signin';
+import { User } from 'src/app/shared/types/user';
 
 @Component({
   selector: 'app-signin',

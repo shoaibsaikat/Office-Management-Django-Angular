@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
 
-import { User } from '../../types/user';
-import { SignIn } from '../../types/signin';
-import { Message } from '../../types/message';
+import { User } from '../../shared/types/user';
+import { SignIn } from '../../shared/types/signin';
+import { Message } from '../../shared/types/message';
+import { Common } from '../../shared/common';
 
 
 @Injectable({
@@ -14,7 +14,10 @@ import { Message } from '../../types/message';
 })
 
 export class AccountService {
-  private baseUrl: string = 'http://127.0.0.1:8000/user/';
+
+  private common: Common = new Common(this.http);
+
+  private baseUrl: string = this.common.getBaseUrl().concat('user/');
   private logInUrl: string = this.baseUrl.concat('signin/');
   private logOutUrl: string = this.baseUrl.concat('signout/');
   private profileUrl: string = this.baseUrl.concat('change_profile/');
@@ -31,7 +34,7 @@ export class AccountService {
   }
 
   logOut(): Observable<Message> {
-    return this.http.post<Message>(this.logOutUrl, null, this.getHttpHeader());
+    return this.http.post<Message>(this.logOutUrl, null, this.common.getHttpHeader());
   }
 
   changeInfo(user: User): Observable<Message> {
@@ -39,32 +42,24 @@ export class AccountService {
       first_name: user.first_name,
       last_name: user.last_name,
       email: user.email || '',
-    }, this.getHttpHeader());
+    }, this.common.getHttpHeader());
   }
 
   getMangerList(): Observable<string> {
-    return this.http.get<string>(this.managerUrl, this.getHttpHeader());
+    return this.http.get<string>(this.managerUrl, this.common.getHttpHeader());
   }
 
   setManger(id: number): Observable<Message> {
     return this.http.post<Message>(this.managerUrl, {
       manager: id,
-    }, this.getHttpHeader());
+    }, this.common.getHttpHeader());
   }
 
   setPassword(last_pass: string, new_pass: string): Observable<Message> {
     return this.http.post<Message>(this.passwordUrl, {
       lastpassword: last_pass,
       newpassword: new_pass,
-    }, this.getHttpHeader());
-  }
-
-  getHttpHeader() {
-    return {
-      headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Authorization': 'Token ' + localStorage.getItem('token')
-    })}
+    }, this.common.getHttpHeader());
   }
 
 }
