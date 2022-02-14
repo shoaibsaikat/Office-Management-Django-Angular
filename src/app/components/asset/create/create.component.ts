@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
 import { AssetService } from 'src/app/services/asset/asset.service';
 
 import { User } from '../../../shared/types/user';
@@ -13,6 +15,25 @@ import { Asset } from 'src/app/shared/types/asset';
   styleUrls: ['./create.component.css']
 })
 export class CreateComponent implements OnInit {
+
+  assetForm: FormGroup = new FormGroup({
+    name: new FormControl('', [Validators.required, ]),
+    model: new FormControl('', [Validators.required, ]),
+    serial: new FormControl('', [Validators.required, ]),
+    purchaseDate: new FormControl('', [Validators.required, ]),
+    warranty: new FormControl('', [Validators.required, ]),
+    type: new FormControl('', [Validators.required, ]),
+    status: new FormControl('', [Validators.required, ]),
+    description: new FormControl(),
+  });
+  get name() { return this.assetForm.get('name'); }
+  get model() { return this.assetForm.get('model'); }
+  get serial() { return this.assetForm.get('serial'); }
+  get purchaseDate() { return this.assetForm.get('purchaseDate'); }
+  get warranty() { return this.assetForm.get('warranty'); }
+  get type() { return this.assetForm.get('type'); }
+  get status() { return this.assetForm.get('status'); }
+  get description() { return this.assetForm.get('description'); }
 
   statusList: Map<number, string> = new Map<number, string>();
   typeList: Map<number, string> = new Map<number, string>();
@@ -43,6 +64,10 @@ export class CreateComponent implements OnInit {
         });
       }
     });
+  }
+
+  onSubmit(): void {
+    console.log('CreateComponent: ' + this.description?.value + ', ' + this.status?.value + ', ' + this.type?.value + ', ' + this.warranty?.value + ', ' + this.purchaseDate?.value);
   }
 
 }

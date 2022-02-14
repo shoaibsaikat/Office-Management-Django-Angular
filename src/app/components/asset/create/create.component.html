@@ -1,114 +1,64 @@
 <div>
-    <form method="post">
+    <form [formGroup]="assetForm" (ngSubmit)="onSubmit()">
         <div class="mb-3">
             <label class="form-label" for="id_name">Name</label>
-            <input type="text" name="name" maxlength="255" class="form-control" placeholder="Name" title="" required="" id="id_name">
+            <input type="text" name="name" maxlength="255" class="form-control" placeholder="Name" required id="id_name" formControlName="name">
+            <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="alert alert-danger">
+                <div *ngIf="name?.errors?.required">Name is required.</div>
+            </div>
         </div>
         <div class="mb-3">
             <label class="form-label" for="id_model">Model</label>
-            <input type="text" name="model" maxlength="255" class="form-control" placeholder="Model" title="" required="" id="id_model">
+            <input type="text" name="model" maxlength="255" class="form-control" placeholder="Model" required id="id_model" formControlName="model">
+            <div *ngIf="model?.invalid && (model?.dirty || model?.touched)" class="alert alert-danger">
+                <div *ngIf="model?.errors?.required">Model is required.</div>
+            </div>
         </div>
         <div class="mb-3">
             <label class="form-label" for="id_serial">Serial</label>
-            <input type="text" name="serial" maxlength="255" class="form-control" placeholder="Serial" title="" required="" id="id_serial">
+            <input type="text" name="serial" maxlength="255" class="form-control" placeholder="Serial" required id="id_serial" formControlName="serial">
+            <div *ngIf="serial?.invalid && (serial?.dirty || serial?.touched)" class="alert alert-danger">
+                <div *ngIf="serial?.errors?.required">Serial is required.</div>
+            </div>
         </div>
         <div class="mb-3">
-            <label class="form-label" for="id_purchaseDate_month">Purchase Date</label>
-            <div class="row bootstrap5-multi-input">
-                <div class="col-4">
-                    <select name="purchaseDate_month" class="form-control" title="" required="" id="id_purchaseDate_month">
-                        <option value="1">January</option>
-                        <option value="2">February</option>
-                        <option value="3">March</option>
-                        <option value="4">April</option>
-                        <option value="5">May</option>
-                        <option value="6">June</option>
-                        <option value="7">July</option>
-                        <option value="8">August</option>
-                        <option value="9">September</option>
-                        <option value="10">October</option>
-                        <option value="11">November</option>
-                        <option value="12">December</option>
-                    </select>
-                </div>
-                <div class="col-4">
-                    <select name="purchaseDate_day" class="form-control" title="" required="" id="id_purchaseDate_day">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                        <option value="21">21</option>
-                        <option value="22">22</option>
-                        <option value="23">23</option>
-                        <option value="24">24</option>
-                        <option value="25">25</option>
-                        <option value="26">26</option>
-                        <option value="27">27</option>
-                        <option value="28">28</option>
-                        <option value="29">29</option>
-                        <option value="30">30</option>
-                        <option value="31">31</option>
-                    </select>
-                </div>
-                <div class="col-4">
-                    <select name="purchaseDate_year" class="form-control" title="" required="" id="id_purchaseDate_year">
-                        <option value="2022">2022</option>
-                        <option value="2023">2023</option>
-                        <option value="2024">2024</option>
-                        <option value="2025">2025</option>
-                        <option value="2026">2026</option>
-                        <option value="2027">2027</option>
-                        <option value="2028">2028</option>
-                        <option value="2029">2029</option>
-                        <option value="2030">2030</option>
-                        <option value="2031">2031</option>
-                    </select>
-                </div>
+            <label class="form-label" for="id_purchaseDate">Purchase Date</label>
+            <input type="date" name="purchaseDate" class="form-control" required id="id_purchaseDate" formControlName="purchaseDate">
+            <div *ngIf="purchaseDate?.invalid && (purchaseDate?.dirty || purchaseDate?.touched)" class="alert alert-danger">
+                <div *ngIf="purchaseDate?.errors?.required">Purchase date is required.</div>
             </div>
         </div>
         <div class="mb-3">
             <label class="form-label" for="id_warranty">Warrenty (in days)</label>
-            <input type="number" name="warranty" value="0" min="0" max="9223372036854775807" class="form-control" placeholder="Warrenty (in days)" title="" required="" id="id_warranty">
+            <input type="number" name="warranty" class="form-control" placeholder="Warrenty (in days)" required id="id_warranty" formControlName="warranty">
+            <div *ngIf="warranty?.invalid && (warranty?.dirty || warranty?.touched)" class="alert alert-danger">
+                <div *ngIf="warranty?.errors?.required">Warranty is required.</div>
+            </div>
         </div>
         <div class="mb-3">
-            <label class="form-label" for="id_type">Type</label>
-            <select name="type" class="form-select" title="" id="id_type">
-                <option value="0" selected="">Others</option>
-                <option value="1">Desktop</option>
-                <option value="2">Laptop</option>
-                <option value="3">Printer</option>
+            <label class="form-label">Type</label>
+            <select class="form-select" formControlName="type">
+                <option value="" disabled>Choose type</option>
+                <option *ngFor="let type of typeList|keyvalue" [ngValue]="type.key">{{type.value}}</option>
             </select>
+            <div *ngIf="type?.invalid && (type?.dirty || type?.touched)" class="alert alert-danger">
+                <div *ngIf="type?.errors?.required">Type is required.</div>
+            </div>
         </div>
         <div class="mb-3">
-            <label class="form-label" for="id_status">Status</label>
-            <select name="status" class="form-select" title="" id="id_status">
-                <option value="0" selected="">Working</option>
-                <option value="1">Repairing</option>
-                <option value="2">Busted</option>
+            <label class="form-label">Status</label>
+            <select class="form-select" formControlName="status">
+                <option value="" disabled>Choose status</option>
+                <option *ngFor="let status of statusList|keyvalue" [ngValue]="status.key">{{status.value}}</option>
             </select>
+            <div *ngIf="status?.invalid && (status?.dirty || status?.touched)" class="alert alert-danger">
+                <div *ngIf="status?.errors?.required">Status is required.</div>
+            </div>
         </div>
         <div class="mb-3">
             <label class="form-label" for="id_description">Description</label>
-            <textarea name="description" cols="40" rows="10" class="form-control" placeholder="Description" title="" id="id_description">
-
-            </textarea>
+            <textarea name="description" cols="40" rows="10" class="form-control" placeholder="Description" id="id_description" formControlName="description"></textarea>
         </div>
-        <input type="submit" value="Save" class="btn btn-cyan">
+        <button type="submit" class="btn btn-cyan" [disabled]="name?.errors || model?.errors || serial?.errors || purchaseDate?.errors || warranty?.errors || type?.errors || status?.errors">Save</button>
     </form>
 </div>
