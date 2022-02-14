@@ -14,24 +14,31 @@ import { Asset } from 'src/app/shared/types/asset';
 })
 export class CreateComponent implements OnInit {
 
+  statusList: Map<number, string> = new Map<number, string>();
+  typeList: Map<number, string> = new Map<number, string>();
+
   constructor(private assetService: AssetService) { }
 
   ngOnInit(): void {
     this.assetService.getAddInfo().subscribe({
       next: (v) => {
         // console.log('CreateComponent: ' + JSON.stringify(v));
-        let objStatusList: Asset[] = JSON.parse(JSON.parse(JSON.stringify(v)).status);
-        let objTypeList: Asset[] = JSON.parse(JSON.parse(JSON.stringify(v)).type);
+        let objStatusList: string[] = JSON.parse(JSON.parse(JSON.stringify(v)).status);
+        let objTypeList: string[] = JSON.parse(JSON.parse(JSON.stringify(v)).type);
 
         objStatusList.forEach(element => {
           if (element) {
-            console.log('CreateComponent: ' + JSON.stringify(element));
+            let status = element.toString().split(',');
+            // console.log('CreateComponent: ' + status[0] + ': ' + status[1] + '\n');
+            this.statusList.set(Number(status[0]), status[1]);
           }
         });
 
         objTypeList.forEach(element => {
           if (element) {
-            console.log('CreateComponent: ' + JSON.stringify(element));
+            let type = element.toString().split(',');
+            // console.log('CreateComponent: ' + type[0] + ': ' + type[1] + '\n');
+            this.typeList.set(Number(type[0]), type[1]);
           }
         });
       }

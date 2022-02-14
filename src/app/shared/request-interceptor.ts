@@ -16,10 +16,10 @@ export class RequestInterceptor implements HttpInterceptor {
 
   constructor(private messageService: MessageService) { }
 
+  // global http error interceptor
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(req)
-      .pipe(
-        tap({
+    return next.handle(req).pipe(
+      tap({
           // Operation failed; error is an HttpErrorResponse
           error: (error) => {
             if (error instanceof HttpErrorResponse) {

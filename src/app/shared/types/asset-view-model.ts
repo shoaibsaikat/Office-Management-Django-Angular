@@ -1,4 +1,4 @@
-export interface Asset {
+export interface AssetViewModel {
     id: number;
     name: string;
     model: string;
@@ -9,7 +9,7 @@ export interface Asset {
     next_user?: number;
     purchase_date: string;
     warranty: number;
-    type: number;
-    status: number;
+    type: string;
+    status: string;
     description?: string;
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { AssetService } from 'src/app/services/asset/asset.service';
 
+import { AppComponent } from 'src/app/app.component';
+
 import { User } from '../../../shared/types/user';
 import { Message } from '../../../shared/types/message';
 import { Common } from '../../../shared/common';
@@ -17,7 +19,7 @@ export class MyListComponent implements OnInit {
   userList: User[] = [];
   assetList: Asset[] = [];
 
-  constructor(private assetService: AssetService) { }
+  constructor(private assetService: AssetService, private appComponent: AppComponent) { }
 
   ngOnInit(): void {
     this.assetService.getMyAssetList().subscribe({
@@ -34,7 +36,7 @@ export class MyListComponent implements OnInit {
         });
 
         objUserList.forEach(element => {
-          if (element) {
+          if (element && element.id != this.appComponent.user.id) {
             this.userList.push(element);
           }
         });
