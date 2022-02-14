@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { AssetService } from 'src/app/services/asset/asset.service';
+import { AppComponent } from 'src/app/app.component';
 
 import { User } from '../../../shared/types/user';
 import { Message } from '../../../shared/types/message';
@@ -38,7 +39,7 @@ export class CreateComponent implements OnInit {
   statusList: Map<number, string> = new Map<number, string>();
   typeList: Map<number, string> = new Map<number, string>();
 
-  constructor(private assetService: AssetService) { }
+  constructor(private assetService: AssetService, private appComponent: AppComponent) { }
 
   ngOnInit(): void {
     this.assetService.getAddInfo().subscribe({
@@ -67,7 +68,22 @@ export class CreateComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('CreateComponent: ' + this.description?.value + ', ' + this.status?.value + ', ' + this.type?.value + ', ' + this.warranty?.value + ', ' + this.purchaseDate?.value);
+    let asset = {
+      name: this.name?.value,
+      model: this.model?.value,
+      serial: this.serial?.value,
+      purchaseDate: (new Date(this.purchaseDate?.value).getTime() / 1000).toString(),
+      warranty: this.warranty?.value,
+      status: this.status?.value,
+      type: this.type?.value,
+      description: this.description?.value || '',
+    };
+
+    this.assetService.createAsset(asset).subscribe(data => {
+      // console.log('ManagerComponent: ' + data.detail);
+      this.appComponent.navigate('');
+    });
+    console.log('CreateComponent: ' + asset.description + ', ' + asset.status + ', ' + asset.type + ', ' + asset.warranty + ', ' + asset.purchaseDate);
   }
 
 }

@@ -44,4 +44,17 @@ export class AssetService {
     return this.http.get<string>(this.editUrl, this.common.getHttpHeader());
   }
 
+  createAsset(asset: any): Observable<string> {
+    return this.http.post<string>(this.addUrl, {
+      name: asset.name,
+      model: asset.model,
+      serial: asset.serial,
+      purchaseDate: asset.purchaseDate,
+      warranty: asset.warranty,
+      status: asset.status,
+      type: asset.type,
+      description: asset.description,
+    }, this.common.getHttpHeader());
+  }
+
 }
