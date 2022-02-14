@@ -1,1 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+.btn-cyan {
+    background-color: #81E1F5;
+    color: #001a1a;
+}
