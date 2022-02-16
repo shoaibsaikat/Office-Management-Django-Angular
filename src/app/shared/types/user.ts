@@ -6,4 +6,8 @@ export interface User {
     email?: string;
     manager_id?: number;
     token?: string;
+    can_distribute_inventory?: boolean;
+    can_approve_inventory?: boolean;
+    can_approve_leave?: boolean;
+    can_manage_asset?: boolean;
 }

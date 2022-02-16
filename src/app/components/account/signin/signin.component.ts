@@ -25,13 +25,7 @@ export class SigninComponent implements OnInit {
     this.accountService.logIn(logIn).subscribe({
       next: (v) => {
         let user: User = v;
-        this.appComponent.user.id = user.id;
-        this.appComponent.user.username = user.username;
-        this.appComponent.user.first_name = user.first_name;
-        this.appComponent.user.last_name = user.last_name;
-        this.appComponent.user.email = user.email;
-        this.appComponent.user.manager_id = user.manager_id;
-        this.appComponent.user.token = user.token;
+        this.appComponent.setCurrentUser(user);
         this.appComponent.saveCurrentUser();
         this.appComponent.navigate('');
       }
