@@ -25,7 +25,7 @@
                                 <div class="col-md-8">
                                     <select class="form-select" formControlName="user">
                                         <option value="" disabled>Choose user</option>
-                                        <option *ngFor="let man of userList" [ngValue]="man.id">{{man.first_name}} {{man.last_name}}</option>
+                                        <option *ngFor="let user of userList" [ngValue]="user.id" [attr.selected]="user.id===item.next_user">{{user.first_name}} {{user.last_name}}</option>
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-cyan col-md-3" [disabled]="!assignFormList[i].get('user')?.value">Assign</button>

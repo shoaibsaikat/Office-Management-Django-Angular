@@ -35,7 +35,7 @@ export class MyListComponent implements OnInit {
         objAssetList.forEach(element => {
           if (element) {
             this.assetList.push(element);
-            // console.log('MyListComponent: id ' + element.id + ' '  + element.name + ' : ' + element.user);
+            console.log('MyListComponent: id ' + element.id + ':' + element.user + ':' + element.next_user + ','  + element.name);
           }
         });
 
