@@ -21,14 +21,15 @@
                         <td>{{item.serial}}</td>
                         <td>{{item.purchase_date|date}}</td>
                         <td>
-                            <form class="row">
+                            <form [formGroup]="assignFormList[i]" class="row" (ngSubmit)="onSubmit(i)">
                                 <div class="col-md-8">
-                                    <select class="form-select">
+                                    <select class="form-select" formControlName="user">
                                         <option value="" disabled>Choose user</option>
                                         <option *ngFor="let man of userList" [ngValue]="man.id">{{man.first_name}} {{man.last_name}}</option>
                                     </select>
                                 </div>
-                                <div type="submit" class="btn btn-cyan col-md-4" (click)="onSubmit(item.id)">Assign</div>
+                                <button type="submit" class="btn btn-cyan col-md-3" [disabled]="!assignFormList[i].get('user')?.value">Assign</button>
+                                <div class="col-md-1"></div>
                             </form>
                         </td>
                     </tr>

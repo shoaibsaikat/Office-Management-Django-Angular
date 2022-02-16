@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+import { FormGroup, FormControl } from '@angular/forms';
+
 import { AssetService } from 'src/app/services/asset/asset.service';
+import { MessageService } from 'src/app/services/message/message.service';
 
 import { AppComponent } from 'src/app/app.component';
 
@@ -18,8 +21,9 @@ export class MyListComponent implements OnInit {
 
   userList: User[] = [];
   assetList: Asset[] = [];
+  assignFormList: FormGroup[] = [];
 
-  constructor(private assetService: AssetService, private appComponent: AppComponent) { }
+  constructor(private assetService: AssetService, private messageService: MessageService, private appComponent: AppComponent) { }
 
   ngOnInit(): void {
     this.assetService.getMyAssetList().subscribe({
@@ -40,12 +44,26 @@ export class MyListComponent implements OnInit {
             this.userList.push(element);
           }
         });
+
+        // generate form groups
+        this.assetList.forEach(element => {
+          this.assignFormList.push(new FormGroup({
+            user: new FormControl(),
+          }));
+        });
+        // console.log('MyListComponent: ngOnInit() ' + this.assignFormList.length);
       }
     });
   }
 
-  onSubmit(item: number): void {
-    // console.log('MyListComponent: ' + item + ' clicked');
+  onSubmit(index: number): void {
+    // console.log('MyListComponent: index: ' + index + ', item.id: ' + this.assetList[index].id + ', user id: ' + this.assignFormList[index].get('user')?.value);
+    this.assetService.assignAsset(this.assetList[index].id, this.assignFormList[index].get('user')?.value).subscribe(data => {
+      // console.log('MyListComponent: ' + JSON.stringify(data));
+      let msg: Message = JSON.parse(JSON.stringify(data));
+      this.messageService.add(msg.detail);
+      // this.appComponent.navigate('');
+    });
   }
 
 }

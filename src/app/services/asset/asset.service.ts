@@ -57,4 +57,11 @@ export class AssetService {
     }, this.common.getHttpHeader());
   }
 
+  assignAsset(assetId: number, userId: number): Observable<string> {
+    return this.http.post<string>(this.myListUrl, {
+      id: assetId,
+      assignee: userId,
+    }, this.common.getHttpHeader());
+  }
+
 }
