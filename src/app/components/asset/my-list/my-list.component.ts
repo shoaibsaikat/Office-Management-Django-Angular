@@ -63,6 +63,8 @@ export class MyListComponent implements OnInit {
       let msg: Message = JSON.parse(JSON.stringify(data));
       this.messageService.add(msg.detail);
       // this.appComponent.navigate('');
+      // update local data
+      this.assetList[index].next_user = this.assignFormList[index].get('user')?.value;
     });
   }
 

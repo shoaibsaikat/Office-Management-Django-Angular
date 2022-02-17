@@ -36,6 +36,18 @@ export class AssetService {
     return this.http.get<string>(this.pendingUrl, this.common.getHttpHeader());
   }
 
+  declinePendingAsset(assetId: number): Observable<string> {
+    return this.http.put<string>(this.pendingUrl, {
+      pk: assetId,
+    }, this.common.getHttpHeader());
+  }
+
+  approvePendingAsset(assetId: number): Observable<string> {
+    return this.http.post<string>(this.pendingUrl, {
+      pk: assetId,
+    }, this.common.getHttpHeader());
+  }
+
   getAddInfo(): Observable<string> {
     return this.http.get<string>(this.addUrl, this.common.getHttpHeader());
   }
@@ -59,7 +71,7 @@ export class AssetService {
 
   assignAsset(assetId: number, userId: number): Observable<string> {
     return this.http.post<string>(this.myListUrl, {
-      id: assetId,
+      pk: assetId,
       assignee: userId,
     }, this.common.getHttpHeader());
   }

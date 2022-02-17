@@ -6,6 +6,8 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 import { User } from './shared/types/user';
 
+import { MessageService } from './services/message/message.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,11 +18,13 @@ export class AppComponent {
   user: User = this.getEmptyUser();
   errorMsg: string = '';
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private messageService: MessageService) {
     this.loadCurrentUser();
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.messageService.clearAll();
+  }
 
   getEmptyUser() {
     return {
