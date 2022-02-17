@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { User } from '../../shared/types/user';
-import { Message } from '../../shared/types/message';
 import { Common } from '../../shared/common';
-import { Asset } from 'src/app/shared/types/asset';
 
 @Injectable({
   providedIn: 'root'

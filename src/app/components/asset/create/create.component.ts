@@ -5,11 +5,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AssetService } from 'src/app/services/asset/asset.service';
 import { AppComponent } from 'src/app/app.component';
 
-import { User } from '../../../shared/types/user';
-import { Message } from '../../../shared/types/message';
-import { Common } from '../../../shared/common';
-import { Asset } from 'src/app/shared/types/asset';
-
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',

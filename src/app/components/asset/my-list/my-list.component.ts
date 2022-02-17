@@ -9,7 +9,6 @@ import { AppComponent } from 'src/app/app.component';
 
 import { User } from '../../../shared/types/user';
 import { Message } from '../../../shared/types/message';
-import { Common } from '../../../shared/common';
 import { Asset } from 'src/app/shared/types/asset';
 
 @Component({
@@ -62,7 +61,6 @@ export class MyListComponent implements OnInit {
       // console.log('MyListComponent: ' + JSON.stringify(data));
       let msg: Message = JSON.parse(JSON.stringify(data));
       this.messageService.add(msg.detail);
-      // this.appComponent.navigate('');
       // update local data
       this.assetList[index].next_user = this.assignFormList[index].get('user')?.value;
     });
