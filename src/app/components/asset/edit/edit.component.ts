@@ -57,6 +57,7 @@ export class EditComponent implements OnInit {
             this.name?.setValue(objAsset.name);
             this.warranty?.setValue(objAsset.warranty);
             this.description?.setValue(objAsset.description);
+            this.status?.setValue(objAsset.status);
           }
         });
     });
@@ -74,7 +75,12 @@ export class EditComponent implements OnInit {
       // console.log('ManagerComponent: ' + data.detail);
       this.appComponent.navigate('');
     });
-    console.log('EditComponent: ' + asset.description + ', ' + asset.status + ', ' + asset.warranty);
+    // console.log('EditComponent: ' + asset.description + ', ' + asset.status + ', ' + asset.warranty);
+  }
+
+  checkIfSelected(item: number): boolean {
+    // console.log('EditComponent: checkIfSelected()' + item + ', ' + this.status?.value);
+    return true ? item == this.status?.value : false;
   }
 
 }
