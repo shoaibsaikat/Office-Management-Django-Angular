@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'asset/all_list', component: AllListComponent },
   { path: 'asset/pending_list', component: PendingListComponent },
   { path: 'asset/create', component: CreateComponent },
-  { path: 'asset/edit', component: EditComponent },
+  { path: 'asset/edit/:id', component: EditComponent },
 ];
 
 @NgModule({

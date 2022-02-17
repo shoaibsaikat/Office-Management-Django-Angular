@@ -52,8 +52,9 @@ export class AssetService {
     return this.http.get<string>(this.addUrl, this.common.getHttpHeader());
   }
 
-  getEditInfo(): Observable<string> {
-    return this.http.get<string>(this.editUrl, this.common.getHttpHeader());
+  getEditInfo(item: number): Observable<string> {
+    let editItemUrl: string = this.editUrl.concat(item + '/');
+    return this.http.get<string>(editItemUrl, this.common.getHttpHeader());
   }
 
   createAsset(asset: any): Observable<string> {
@@ -73,6 +74,16 @@ export class AssetService {
     return this.http.post<string>(this.myListUrl, {
       pk: assetId,
       assignee: userId,
+    }, this.common.getHttpHeader());
+  }
+
+  updateAsset(item: number, asset: any): Observable<string> {
+    let editItemUrl: string = this.editUrl.concat(item + '/');
+    return this.http.post<string>(editItemUrl, {
+      name: asset.name,
+      warranty: asset.warranty,
+      status: asset.status,
+      description: asset.description,
     }, this.common.getHttpHeader());
   }
 
