@@ -3,6 +3,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 
 import { AccountService } from '../../../services/account/account.service';
+import { MessageService } from 'src/app/services/message/message.service';
 
 @Component({
   selector: 'app-signout',
@@ -11,7 +12,7 @@ import { AccountService } from '../../../services/account/account.service';
 })
 export class SignoutComponent implements OnInit {
 
-  constructor(private appComponent: AppComponent, private accountService: AccountService) { }
+  constructor(private appComponent: AppComponent, private accountService: AccountService, private messageService: MessageService) { }
 
   ngOnInit(): void {
   }
@@ -20,6 +21,7 @@ export class SignoutComponent implements OnInit {
     this.accountService.logOut().subscribe(data => {
       // console.log('SignoutComponent: ' + data.detail);
       this.appComponent.navigate('');
+      this.messageService.clearAll();
     });
     this.appComponent.saveEmptyUser();
   }
