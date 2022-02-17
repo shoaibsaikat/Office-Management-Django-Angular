@@ -30,9 +30,10 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="id_warranty">Warrenty (in days)</label>
-            <input type="number" name="warranty" class="form-control" placeholder="Warrenty (in days)" required id="id_warranty" formControlName="warranty">
+            <input type="number" name="warranty" class="form-control" placeholder="Warrenty (in days)" required id="id_warranty" min="0" formControlName="warranty">
             <div *ngIf="warranty?.invalid && (warranty?.dirty || warranty?.touched)" class="alert alert-danger">
                 <div *ngIf="warranty?.errors?.required">Warranty is required.</div>
+                <div *ngIf="warranty?.errors?.min">0 is the minimum value.</div>
             </div>
         </div>
         <div class="mb-3">

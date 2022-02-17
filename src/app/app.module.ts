@@ -18,6 +18,7 @@ import { AllListComponent } from './components/asset/all-list/all-list.component
 import { PendingListComponent } from './components/asset/pending-list/pending-list.component';
 import { CreateComponent } from './components/asset/create/create.component';
 import { EditComponent } from './components/asset/edit/edit.component';
+import { ListComponent } from './components/inventory/list/list.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { EditComponent } from './components/asset/edit/edit.component';
     AllListComponent,
     PendingListComponent,
     CreateComponent,
-    EditComponent
+    EditComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,7 @@ import { AllListComponent } from './components/asset/all-list/all-list.component
 import { PendingListComponent } from './components/asset/pending-list/pending-list.component';
 import { EditComponent } from './components/asset/edit/edit.component';
 import { CreateComponent } from './components/asset/create/create.component';
+import { ListComponent } from './components/inventory/list/list.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'asset/pending_list', component: PendingListComponent },
   { path: 'asset/create', component: CreateComponent },
   { path: 'asset/edit/:id', component: EditComponent },
+  { path: 'inventory/list', component: ListComponent },
 ];
 
 @NgModule({

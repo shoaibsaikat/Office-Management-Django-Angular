@@ -71,7 +71,7 @@
             <div class="card-header bg-info bg-opacity-50"><strong>Inventory</strong></div>
             <div class="card-body">
               <div class="list-group">
-                  <a *ngIf="user.can_approve_inventory || user.can_distribute_inventory" class="nav-link list-group-item" href="#">List</a>
+                  <a *ngIf="user.can_approve_inventory || user.can_distribute_inventory" class="nav-link list-group-item" routerLink="/inventory/list">List</a>
                   <a *ngIf="user.can_approve_inventory || user.can_distribute_inventory" class="nav-link list-group-item" href="#">History</a>
                   <a class="nav-link list-group-item" href="#">Apply</a>
                   <a class="nav-link list-group-item" href="#">Mine</a>
