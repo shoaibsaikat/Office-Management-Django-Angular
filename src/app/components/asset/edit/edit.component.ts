@@ -73,7 +73,7 @@ export class EditComponent implements OnInit {
 
     this.assetService.updateAsset(this.id, asset).subscribe(data => {
       // console.log('ManagerComponent: ' + data.detail);
-      this.appComponent.navigate('');
+      this.appComponent.navigate('asset/all_list');
     });
     // console.log('EditComponent: ' + asset.description + ', ' + asset.status + ', ' + asset.warranty);
   }
