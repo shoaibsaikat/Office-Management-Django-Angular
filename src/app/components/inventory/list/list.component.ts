@@ -7,7 +7,6 @@ import { MessageService } from 'src/app/services/message/message.service';
 
 import { AppComponent } from 'src/app/app.component';
 
-import { User } from '../../../shared/types/user';
 import { Message } from '../../../shared/types/message';
 import { Inventory } from 'src/app/shared/types/inventory';
 
@@ -33,7 +32,7 @@ export class ListComponent implements OnInit {
         objInventoryList.forEach(element => {
           if (element) {
             this.inventoryList.push(element);
-            console.log('ListComponent: id ' + element.id + ':' + element.name);
+            // console.log('ListComponent: id ' + element.id + ':' + element.name);
           }
         });
 
