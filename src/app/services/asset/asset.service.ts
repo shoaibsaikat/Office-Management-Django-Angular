@@ -74,8 +74,8 @@ export class AssetService {
     }, this.common.getHttpHeader());
   }
 
-  updateAsset(item: number, asset: any): Observable<string> {
-    let editItemUrl: string = this.editUrl.concat(item + '/');
+  updateAsset(asset: any): Observable<string> {
+    let editItemUrl: string = this.editUrl.concat(asset.id + '/');
     return this.http.post<string>(editItemUrl, {
       name: asset.name,
       warranty: asset.warranty,

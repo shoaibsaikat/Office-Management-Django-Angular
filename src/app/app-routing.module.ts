@@ -8,10 +8,11 @@ import { PasswordComponent } from './components/account/password/password.compon
 import { MyListComponent } from './components/asset/my-list/my-list.component';
 import { AllListComponent } from './components/asset/all-list/all-list.component';
 import { PendingListComponent } from './components/asset/pending-list/pending-list.component';
-import { EditComponent } from './components/asset/edit/edit.component';
+import { EditComponent as AssetEditComponent } from './components/asset/edit/edit.component';
 import { CreateComponent as AssetCreateComponent } from './components/asset/create/create.component';
 import { ListComponent } from './components/inventory/list/list.component';
 import { CreateComponent as InventoryCreateComponent } from './components/inventory/create/create.component';
+import { EditComponent as InventoryEditComponent } from './components/inventory/edit/edit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -23,9 +24,10 @@ const routes: Routes = [
   { path: 'asset/all_list', component: AllListComponent },
   { path: 'asset/pending_list', component: PendingListComponent },
   { path: 'asset/create', component: AssetCreateComponent },
-  { path: 'asset/edit/:id', component: EditComponent },
+  { path: 'asset/edit/:id', component: AssetEditComponent },
   { path: 'inventory/list', component: ListComponent },
   { path: 'inventory/create', component: InventoryCreateComponent },
+  { path: 'inventory/edit/:id', component: InventoryEditComponent },
 ];
 
 @NgModule({

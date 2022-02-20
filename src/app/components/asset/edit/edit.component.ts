@@ -42,7 +42,7 @@ export class EditComponent implements OnInit {
           next: (v) => {
             // console.log('EditComponent: ' + JSON.stringify(v));
             let objAsset: Asset = JSON.parse(JSON.parse(JSON.stringify(v)).asset);
-            let objStatusList: Asset[] = JSON.parse(JSON.parse(JSON.stringify(v)).status);
+            let objStatusList: [{}] = JSON.parse(JSON.parse(JSON.stringify(v)).status);
             // console.log('EditComponent: ' + JSON.stringify(objAsset));
             objStatusList.forEach(element => {
               if (element) {
@@ -62,13 +62,14 @@ export class EditComponent implements OnInit {
 
   onSubmit(): void {
     let asset = {
+      id: this.id,
       name: this.name?.value,
       warranty: this.warranty?.value,
       status: this.status?.value,
       description: this.description?.value || '',
     };
 
-    this.assetService.updateAsset(this.id, asset).subscribe(data => {
+    this.assetService.updateAsset(asset).subscribe(data => {
       // console.log('ManagerComponent: ' + data.detail);
       this.appComponent.navigate('asset/all_list');
     });
