@@ -13,14 +13,18 @@ import { ProfileComponent } from './components/account/profile/profile.component
 import { ManagerComponent } from './components/account/manager/manager.component';
 import { PasswordComponent } from './components/account/password/password.component';
 import { MessageComponent } from './components/message/message.component';
-import { MyListComponent } from './components/asset/my-list/my-list.component';
-import { AllListComponent } from './components/asset/all-list/all-list.component';
-import { PendingListComponent } from './components/asset/pending-list/pending-list.component';
+import { MyListComponent as AssetMyListComponent } from './components/asset/my-list/my-list.component';
+import { AllListComponent as AssetAllListComponent } from './components/asset/all-list/all-list.component';
+import { PendingListComponent as AssetPendingListComponent } from './components/asset/pending-list/pending-list.component';
 import { CreateComponent as AssetCreateComponent } from './components/asset/create/create.component';
 import { EditComponent as AssetEditComponent } from './components/asset/edit/edit.component';
 import { ListComponent } from './components/inventory/list/list.component';
 import { CreateComponent as InventoryCreateComponent } from './components/inventory/create/create.component';
 import { EditComponent as InventoryEditComponent } from './components/inventory/edit/edit.component';
+import { CreateComponent } from './components/requisition/create/create.component';
+import { HistoryComponent } from './components/requisition/history/history.component';
+import { MyListComponent as RequisitionMyListComponent } from './components/requisition/my-list/my-list.component';
+import { PendingListComponent as RequisitionPendingListComponent } from './components/requisition/pending-list/pending-list.component';
 
 @NgModule({
   declarations: [
@@ -32,14 +36,18 @@ import { EditComponent as InventoryEditComponent } from './components/inventory/
     ManagerComponent,
     PasswordComponent,
     MessageComponent,
-    MyListComponent,
-    AllListComponent,
-    PendingListComponent,
+    AssetMyListComponent,
+    AssetAllListComponent,
+    AssetPendingListComponent,
     AssetCreateComponent,
     AssetEditComponent,
     ListComponent,
     InventoryCreateComponent,
     InventoryEditComponent,
+    CreateComponent,
+    HistoryComponent,
+    RequisitionMyListComponent,
+    RequisitionPendingListComponent,
   ],
   imports: [
     BrowserModule,
