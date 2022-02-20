@@ -26,6 +26,7 @@ import { CreateComponent } from './components/requisition/create/create.componen
 import { HistoryComponent } from './components/requisition/history/history.component';
 import { MyListComponent as RequisitionMyListComponent } from './components/requisition/my-list/my-list.component';
 import { PendingListComponent as RequisitionPendingListComponent } from './components/requisition/pending-list/pending-list.component';
+import { DetailComponent as RequisitionDetailComponent } from './components/requisition/detail/detail.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { PendingListComponent as RequisitionPendingListComponent } from './compo
     HistoryComponent,
     RequisitionMyListComponent,
     RequisitionPendingListComponent,
+    RequisitionDetailComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="card-header">
+        <h3>
+            {{requisition?.user_name}} requested for {{requisition?.amount}} {{requisition?.unit}}(s) of {{requisition?.name}}
+        </h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-3"><strong>Status:</strong></div>
+            <div class="col-sm-9"><span class="text-success">Distributed</span></div>
+        </div>
+        <div class="row" *ngIf="requisition?.approved">
+            <div class="col-sm-3"><strong>Approver:</strong></div>
+            <div class="col-sm-9">shoaib.rahman</div>
+        </div>
+        <div class="row" *ngIf="requisition?.distributed">
+            <div class="col-sm-3"><strong>Distributor:</strong></div>
+            <div class="col-sm-9">test1</div>
+        </div>
+    </div>
+</div>
