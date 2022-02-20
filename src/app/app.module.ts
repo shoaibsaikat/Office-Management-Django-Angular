@@ -16,9 +16,10 @@ import { MessageComponent } from './components/message/message.component';
 import { MyListComponent } from './components/asset/my-list/my-list.component';
 import { AllListComponent } from './components/asset/all-list/all-list.component';
 import { PendingListComponent } from './components/asset/pending-list/pending-list.component';
-import { CreateComponent } from './components/asset/create/create.component';
+import { CreateComponent as AssetCreateComponent } from './components/asset/create/create.component';
 import { EditComponent } from './components/asset/edit/edit.component';
 import { ListComponent } from './components/inventory/list/list.component';
+import { CreateComponent as InventoryCreateComponent } from './components/inventory/create/create.component'
 
 @NgModule({
   declarations: [
@@ -33,9 +34,10 @@ import { ListComponent } from './components/inventory/list/list.component';
     MyListComponent,
     AllListComponent,
     PendingListComponent,
-    CreateComponent,
+    AssetCreateComponent,
     EditComponent,
-    ListComponent
+    ListComponent,
+    InventoryCreateComponent
   ],
   imports: [
     BrowserModule,
