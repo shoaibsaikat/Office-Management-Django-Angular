@@ -8,18 +8,16 @@
         <div class="row">
             <div class="col-sm-3"><strong>Status:</strong></div>
             <div class="col-sm-9">
-                <span *ngIf="!requisition?.approved" class="text-danger">Awaiting approval</span>
-                <span *ngIf="requisition?.approved && !requisition?.distributed" class="text-warning">Awaiting distribution</span>
-                <span *ngIf="requisition?.distributed" class="text-success">Complete</span>
+                <span *ngIf="!requisition?.approved" class="text-danger">
+                    Awaiting approval of {{requisition?.approver_name}}.
+                </span>
+                <span *ngIf="requisition?.approved && !requisition?.distributed" class="text-warning">
+                    Awaiting distribution from {{requisition?.distributor_name}}.
+                </span>
+                <span *ngIf="requisition?.distributed" class="text-success">
+                    Request completed.
+                </span>
             </div>
-        </div>
-        <div class="row" *ngIf="requisition?.approved">
-            <div class="col-sm-3"><strong>Approver:</strong></div>
-            <div class="col-sm-9">{{requisition?.approver_name}}</div>
-        </div>
-        <div class="row" *ngIf="requisition?.distributed">
-            <div class="col-sm-3"><strong>Distributor:</strong></div>
-            <div class="col-sm-9">{{requisition?.distributor_name}}</div>
         </div>
     </div>
 </div>

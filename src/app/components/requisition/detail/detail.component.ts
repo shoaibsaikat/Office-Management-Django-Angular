@@ -31,7 +31,7 @@ export class DetailComponent implements OnInit {
       this.requisitionService.getDetail(this.id).subscribe({
         next: (v) => {
           // console.log('EditComponent: ' + JSON.stringify(v));
-          this.requisition = JSON.parse(JSON.parse(JSON.stringify(v)).inventory);
+          this.requisition = JSON.parse(JSON.parse(JSON.stringify(v)).requisition);
         }
       });
     });
