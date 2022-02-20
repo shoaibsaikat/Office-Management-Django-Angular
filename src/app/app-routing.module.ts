@@ -13,6 +13,7 @@ import { CreateComponent as AssetCreateComponent } from './components/asset/crea
 import { ListComponent } from './components/inventory/list/list.component';
 import { CreateComponent as InventoryCreateComponent } from './components/inventory/create/create.component';
 import { EditComponent as InventoryEditComponent } from './components/inventory/edit/edit.component';
+import { HistoryComponent } from './components/requisition/history/history.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'inventory/list', component: ListComponent },
   { path: 'inventory/create', component: InventoryCreateComponent },
   { path: 'inventory/edit/:id', component: InventoryEditComponent },
+  { path: 'requisition/history', component: HistoryComponent },
 ];
 
 @NgModule({

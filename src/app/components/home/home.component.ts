@@ -17,12 +17,12 @@ import { Inventory } from 'src/app/shared/types/inventory';
 })
 export class HomeComponent implements OnInit {
 
-  title = 'Inventory';  
+  title = 'Inventory';
   type = ChartType.BarChart;
   data: any[] = [];
-  columnNames = ['Item', 'Amount'];  
-  options = { 'is3D': true, colors: ['#283142',] };  
-  width = 800;  
+  columnNames = ['Item', 'Amount'];
+  options = { 'is3D': true, colors: ['#81E1F5', '#EF666D'] };
+  // width = 800;
   height = 500;
 
   constructor(private inventoryService: InventoryService, private messageService: MessageService, private appComponent: AppComponent) {

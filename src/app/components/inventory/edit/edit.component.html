@@ -1,10 +1,9 @@
 <div class="row">
+    <h3>{{name}}</h3>
+    <br><br><br>
     <form [formGroup]="inventoryForm" (ngSubmit)="onSubmit()">
         <div class="mb-3">
-            <label class="form-label"><h3>{{name}}</h3></label>
-        </div>
-        <div class="mb-3">
-            <label class="form-label" for="id_count">Amount ({{unit}})</label>
+            <label class="form-label" for="id_count">Total {{unit}} available</label>
             <input type="number" name="count" class="form-control" placeholder="Amount" required id="id_count" min="0" formControlName="count">
             <div *ngIf="count?.invalid && (count?.dirty || count?.touched)" class="alert alert-danger">
                 <div *ngIf="count?.errors?.required">Amount is required.</div>

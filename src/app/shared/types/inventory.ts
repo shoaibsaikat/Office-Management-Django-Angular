@@ -3,5 +3,5 @@ export interface Inventory {
     name: string;
     unit: string;
     count: number;
-    description: string;
+    description?: string;
 }
