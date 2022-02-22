@@ -35,4 +35,9 @@ export class HistoryComponent implements OnInit {
     });
   }
 
+  onClick(item: Requisition): void {
+    this.requisitionService.setCurrentRequisition(item);
+    this.appComponent.navigate('requisition/detail');
+  }
+
 }
