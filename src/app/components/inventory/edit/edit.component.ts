@@ -8,7 +8,6 @@ import { MessageService } from 'src/app/services/message/message.service';
 
 import { AppComponent } from 'src/app/app.component';
 
-import { Message } from '../../../shared/types/message';
 import { Inventory } from 'src/app/shared/types/inventory';
 
 @Component({
@@ -35,19 +34,12 @@ export class EditComponent implements OnInit {
     private appComponent: AppComponent) { }
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe(params => {
-      this.id = Number(params.get('id'));
-      this.inventoryService.getEditInfo(this.id).subscribe({
-        next: (v) => {
-          // console.log('EditComponent: ' + JSON.stringify(v));
-          let objAsset: Inventory = JSON.parse(JSON.parse(JSON.stringify(v)).inventory);
-          this.name = objAsset.name;
-          this.unit = objAsset.unit;
-          this.inventoryForm.get('count')?.setValue(objAsset.count);
-          this.inventoryForm.get('description')?.setValue(objAsset.description);
-        }
-      });
-    });
+    let item = this.inventoryService.getCurrentInventory();
+    this.id = item.id;
+    this.name = item.name;
+    this.unit = item.unit;
+    this.inventoryForm.get('count')?.setValue(item.count);
+    this.inventoryForm.get('description')?.setValue(item.description);
   }
 
   onSubmit(): void {

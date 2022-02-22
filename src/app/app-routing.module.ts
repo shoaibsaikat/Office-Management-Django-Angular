@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: 'asset/edit/:id', component: AssetEditComponent },
   { path: 'inventory/list', component: ListComponent },
   { path: 'inventory/create', component: InventoryCreateComponent },
-  { path: 'inventory/edit/:id', component: InventoryEditComponent },
+  { path: 'inventory/edit', component: InventoryEditComponent },
   { path: 'requisition/history', component: HistoryComponent },
   { path: 'requisition/detail', component: RequisitionDetailComponent },
   { path: 'requisition/my_list', component: RequisitionMyListComponent },

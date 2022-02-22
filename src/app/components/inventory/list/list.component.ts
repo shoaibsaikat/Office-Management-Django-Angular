@@ -64,4 +64,9 @@ export class ListComponent implements OnInit {
     return false ? this.inventoryFormList[index].get('count')?.value >= 0 : true;
   }
 
+  onClick(item: Inventory): void {
+    this.inventoryService.setCurrentInventory(item);
+    this.appComponent.navigate('inventory/edit');
+  }
+
 }

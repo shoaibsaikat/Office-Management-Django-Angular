@@ -13,6 +13,13 @@ export class InventoryService {
 
   private common: Common = new Common(this.http);
 
+  private currentInventory: Inventory = {
+    id: 0,
+    name: '',
+    count: 0,
+    unit: '',
+  };
+
   private baseUrl: string = this.common.getBaseUrl().concat('inventory/');
   private listUrl: string = this.baseUrl.concat('?page=1');
   private chartlistUrl: string = this.baseUrl.concat('inventory_list');
@@ -57,6 +64,14 @@ export class InventoryService {
       count: item.count,
       description: item.description,
     }, this.common.getHttpHeader());
+  }
+
+  setCurrentInventory(item: Inventory): void {
+    this.currentInventory = item;
+  }
+
+  getCurrentInventory(): Inventory {
+    return this.currentInventory;
   }
 
 }
