@@ -18,6 +18,7 @@ export class RequisitionService {
   private historyUrl: string = this.baseUrl.concat('history/');
   private myRequisitionUrl: string = this.baseUrl.concat('my_list/');
   private detailUrl: string = this.baseUrl.concat('detail/');
+  private createUrl: string = this.baseUrl.concat('create/');
 
   constructor(private http: HttpClient) { }
 
@@ -32,5 +33,20 @@ export class RequisitionService {
   getDetail(item: number): Observable<string> {
     let detailItemUrl: string = this.detailUrl.concat(item + '/');
     return this.http.get<string>(detailItemUrl, this.common.getHttpHeader());
+  }
+
+  getAddInfo(): Observable<string> {
+    return this.http.get<string>(this.createUrl, this.common.getHttpHeader());
+  }
+
+  createRequisition(title: string, inventory: number, approver: number, amount: number, comment: string): Observable<string> {
+    console.log(title + ":" + inventory + ":" + approver + ":" + amount + ":" + comment);
+    return this.http.post<string>(this.createUrl, {
+      title: title,
+      inventory: inventory,
+      approver: approver,
+      amount: amount,
+      comment: comment,
+    }, this.common.getHttpHeader());
   }
 }

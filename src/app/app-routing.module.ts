@@ -16,6 +16,7 @@ import { EditComponent as InventoryEditComponent } from './components/inventory/
 import { HistoryComponent } from './components/requisition/history/history.component';
 import { DetailComponent as RequisitionDetailComponent } from './components/requisition/detail/detail.component';
 import { MyListComponent as RequisitionMyListComponent } from './components/requisition/my-list/my-list.component';
+import { CreateComponent as RequisitionCreateComponent } from './components/requisition/create/create.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'requisition/history', component: HistoryComponent },
   { path: 'requisition/detail/:id', component: RequisitionDetailComponent },
   { path: 'requisition/my_list', component: RequisitionMyListComponent },
+  { path: 'requisition/create', component: RequisitionCreateComponent },
 ];
 
 @NgModule({
