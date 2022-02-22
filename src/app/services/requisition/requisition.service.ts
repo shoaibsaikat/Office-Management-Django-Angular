@@ -16,12 +16,17 @@ export class RequisitionService {
 
   private baseUrl: string = this.common.getBaseUrl().concat('inventory/requisition/');
   private historyUrl: string = this.baseUrl.concat('history/');
+  private myRequisitionUrl: string = this.baseUrl.concat('my_list/');
   private detailUrl: string = this.baseUrl.concat('detail/');
 
   constructor(private http: HttpClient) { }
 
   getHistory(): Observable<string> {
     return this.http.get<string>(this.historyUrl, this.common.getHttpHeader());
+  }
+
+  getMyRequisitionList(): Observable<string> {
+    return this.http.get<string>(this.myRequisitionUrl, this.common.getHttpHeader());
   }
 
   getDetail(item: number): Observable<string> {

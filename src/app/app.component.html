@@ -74,7 +74,7 @@
                   <a *ngIf="user.can_approve_inventory || user.can_distribute_inventory" class="nav-link list-group-item" routerLink="/inventory/list">List</a>
                   <a *ngIf="user.can_approve_inventory || user.can_distribute_inventory" class="nav-link list-group-item" routerLink="/requisition/history">History</a>
                   <a class="nav-link list-group-item" href="#">Apply</a>
-                  <a class="nav-link list-group-item" href="#">Mine</a>
+                  <a class="nav-link list-group-item" routerLink="/requisition/my_list">Mine</a>
                   <a *ngIf="user.can_approve_inventory" class="nav-link list-group-item" href="#">Incoming</a>
                   <a *ngIf="user.can_distribute_inventory" class="nav-link list-group-item" href="#">Distribution</a>
               </div>

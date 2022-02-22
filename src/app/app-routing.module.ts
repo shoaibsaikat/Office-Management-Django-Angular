@@ -5,7 +5,7 @@ import { SigninComponent } from './components/account/signin/signin.component';
 import { ProfileComponent } from './components/account/profile/profile.component';
 import { ManagerComponent } from './components/account/manager/manager.component';
 import { PasswordComponent } from './components/account/password/password.component';
-import { MyListComponent } from './components/asset/my-list/my-list.component';
+import { MyListComponent as AssetMyListComponent } from './components/asset/my-list/my-list.component';
 import { AllListComponent } from './components/asset/all-list/all-list.component';
 import { PendingListComponent } from './components/asset/pending-list/pending-list.component';
 import { EditComponent as AssetEditComponent } from './components/asset/edit/edit.component';
@@ -15,6 +15,7 @@ import { CreateComponent as InventoryCreateComponent } from './components/invent
 import { EditComponent as InventoryEditComponent } from './components/inventory/edit/edit.component';
 import { HistoryComponent } from './components/requisition/history/history.component';
 import { DetailComponent as RequisitionDetailComponent } from './components/requisition/detail/detail.component';
+import { MyListComponent as RequisitionMyListComponent } from './components/requisition/my-list/my-list.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,7 +23,7 @@ const routes: Routes = [
   { path: 'account/profile', component: ProfileComponent },
   { path: 'account/manager', component: ManagerComponent },
   { path: 'account/password', component: PasswordComponent },
-  { path: 'asset/my_list', component: MyListComponent },
+  { path: 'asset/my_list', component: AssetMyListComponent },
   { path: 'asset/all_list', component: AllListComponent },
   { path: 'asset/pending_list', component: PendingListComponent },
   { path: 'asset/create', component: AssetCreateComponent },
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'inventory/edit/:id', component: InventoryEditComponent },
   { path: 'requisition/history', component: HistoryComponent },
   { path: 'requisition/detail/:id', component: RequisitionDetailComponent },
+  { path: 'requisition/my_list', component: RequisitionMyListComponent },
 ];
 
 @NgModule({

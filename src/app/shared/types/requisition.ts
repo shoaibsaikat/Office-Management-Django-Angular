@@ -1,7 +1,7 @@
 export interface Requisition {
     id: number;
-    user?: number;
-    user_name?: string;
+    user: number;
+    user_name: string;
     name: string;
     unit: string;
     total: number;
