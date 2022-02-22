@@ -25,8 +25,9 @@ import { EditComponent as InventoryEditComponent } from './components/inventory/
 import { CreateComponent } from './components/requisition/create/create.component';
 import { HistoryComponent } from './components/requisition/history/history.component';
 import { MyListComponent as RequisitionMyListComponent } from './components/requisition/my-list/my-list.component';
-import { PendingListComponent as RequisitionPendingListComponent } from './components/requisition/pending-list/pending-list.component';
 import { DetailComponent as RequisitionDetailComponent } from './components/requisition/detail/detail.component';
+import { PendingApprovalComponent } from './components/requisition/pending-approval/pending-approval.component';
+import { PendingDistributionComponent } from './components/requisition/pending-distribution/pending-distribution.component';
 
 @NgModule({
   declarations: [
@@ -49,8 +50,9 @@ import { DetailComponent as RequisitionDetailComponent } from './components/requ
     CreateComponent,
     HistoryComponent,
     RequisitionMyListComponent,
-    RequisitionPendingListComponent,
     RequisitionDetailComponent,
+    PendingApprovalComponent,
+    PendingDistributionComponent,
   ],
   imports: [
     BrowserModule,

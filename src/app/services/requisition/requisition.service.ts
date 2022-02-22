@@ -19,6 +19,7 @@ export class RequisitionService {
   private myRequisitionUrl: string = this.baseUrl.concat('my_list/');
   private detailUrl: string = this.baseUrl.concat('detail/');
   private createUrl: string = this.baseUrl.concat('create/');
+  private approvalUrl: string = this.baseUrl.concat('approval/');
 
   constructor(private http: HttpClient) { }
 
@@ -47,6 +48,17 @@ export class RequisitionService {
       approver: approver,
       amount: amount,
       comment: comment,
+    }, this.common.getHttpHeader());
+  }
+
+  getApprovalList(): Observable<string> {
+    return this.http.get<string>(this.approvalUrl, this.common.getHttpHeader());
+  }
+
+  setApprover(id: number, distributor: number): Observable<string> {
+    return this.http.post<string>(this.approvalUrl, {
+      pk: id,
+      distributor: distributor,
     }, this.common.getHttpHeader());
   }
 }

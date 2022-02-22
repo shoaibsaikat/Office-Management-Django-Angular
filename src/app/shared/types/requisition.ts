@@ -2,7 +2,7 @@ export interface Requisition {
     id: number;
     user: number;
     user_name: string;
-    name: string;
+    item_name: string;
     unit: string;
     total: number;
     approver: number;
