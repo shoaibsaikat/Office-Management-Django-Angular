@@ -18,6 +18,7 @@ import { DetailComponent as RequisitionDetailComponent } from './components/requ
 import { MyListComponent as RequisitionMyListComponent } from './components/requisition/my-list/my-list.component';
 import { CreateComponent as RequisitionCreateComponent } from './components/requisition/create/create.component';
 import { PendingApprovalComponent } from './components/requisition/pending-approval/pending-approval.component';
+import { PendingDistributionComponent } from './components/requisition/pending-distribution/pending-distribution.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'requisition/my_list', component: RequisitionMyListComponent },
   { path: 'requisition/create', component: RequisitionCreateComponent },
   { path: 'requisition/approval', component: PendingApprovalComponent },
+  { path: 'requisition/distribution', component: PendingDistributionComponent },
 ];
 
 @NgModule({

@@ -76,7 +76,7 @@
                   <a class="nav-link list-group-item" routerLink="/requisition/create">Request</a>
                   <a class="nav-link list-group-item" routerLink="/requisition/my_list">Mine</a>
                   <a *ngIf="user.can_approve_inventory" class="nav-link list-group-item" routerLink="/requisition/approval">Incoming</a>
-                  <a *ngIf="user.can_distribute_inventory" class="nav-link list-group-item" href="#">Distribution</a>
+                  <a *ngIf="user.can_distribute_inventory" class="nav-link list-group-item" routerLink="/requisition/distribution">Distribution</a>
               </div>
             </div>
           </div>

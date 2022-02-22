@@ -20,6 +20,7 @@ export class RequisitionService {
   private detailUrl: string = this.baseUrl.concat('detail/');
   private createUrl: string = this.baseUrl.concat('create/');
   private approvalUrl: string = this.baseUrl.concat('approval/');
+  private distributionUrl: string = this.baseUrl.concat('distribution/');
 
   constructor(private http: HttpClient) { }
 
@@ -55,10 +56,20 @@ export class RequisitionService {
     return this.http.get<string>(this.approvalUrl, this.common.getHttpHeader());
   }
 
-  setApprover(id: number, distributor: number): Observable<string> {
+  setDistributor(id: number, distributor: number): Observable<string> {
     return this.http.post<string>(this.approvalUrl, {
       pk: id,
       distributor: distributor,
+    }, this.common.getHttpHeader());
+  }
+
+  getDistributionList(): Observable<string> {
+    return this.http.get<string>(this.distributionUrl, this.common.getHttpHeader());
+  }
+
+  distribute(id: number): Observable<string> {
+    return this.http.post<string>(this.distributionUrl, {
+      pk: id,
     }, this.common.getHttpHeader());
   }
 }
