@@ -6,7 +6,6 @@ import { MessageService } from 'src/app/services/message/message.service';
 import { AppComponent } from 'src/app/app.component';
 
 import { Requisition } from 'src/app/shared/types/requisition';
-import { User } from 'src/app/shared/types/user';
 
 @Component({
   selector: 'app-pending-distribution',

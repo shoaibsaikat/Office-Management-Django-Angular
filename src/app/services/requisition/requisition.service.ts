@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Common } from '../../shared/common';
-import { Inventory } from 'src/app/shared/types/inventory';
 import { Requisition } from 'src/app/shared/types/requisition';
 
 @Injectable({
@@ -13,6 +12,20 @@ import { Requisition } from 'src/app/shared/types/requisition';
 export class RequisitionService {
 
   private common: Common = new Common(this.http);
+
+  private currentRequisition: Requisition = {
+    id: 0,
+    amount: 0,
+    approver: 0,
+    approver_name: '',
+    date: '',
+    item_name: '',
+    title: '',
+    total: 0,
+    unit: '',
+    user: 0,
+    user_name: '',
+  };
 
   private baseUrl: string = this.common.getBaseUrl().concat('inventory/requisition/');
   private historyUrl: string = this.baseUrl.concat('history/');
@@ -71,5 +84,13 @@ export class RequisitionService {
     return this.http.post<string>(this.distributionUrl, {
       pk: id,
     }, this.common.getHttpHeader());
+  }
+
+  setCurrentRequisition(item: Requisition): void {
+    this.currentRequisition = item;
+  }
+
+  getCurrentRequisition(): Requisition {
+    return this.currentRequisition;
   }
 }
