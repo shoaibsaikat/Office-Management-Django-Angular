@@ -8,3 +8,7 @@
     background-color: #FFC107;
     color: #001a1a;
 }
+
+.cursor {
+    cursor: pointer;
+}

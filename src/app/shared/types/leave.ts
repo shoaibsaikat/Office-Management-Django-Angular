@@ -1,4 +1,4 @@
-export interface Asset {
+export interface Leave {
     id: number;
     title: string;
     user: number;
