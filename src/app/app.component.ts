@@ -48,7 +48,7 @@ export class AppComponent {
     this.user.can_distribute_inventory = undefined;
     this.user.can_manage_asset = undefined;
     this.saveCurrentUser();
-    console.log('AppComponent:saveEmptyUser() ' + this.user.id + ' : ' + this.user.username);
+    // console.log('AppComponent:saveEmptyUser() ' + this.user.id + ' : ' + this.user.username);
   }
 
   loadCurrentUser(): void {
@@ -82,7 +82,7 @@ export class AppComponent {
     } else {
       localStorage.setItem('token', '');
     }
-    console.log('AppComponent:saveCurrentUser() ' + this.user.id + ' : ' + this.user.username);
+    // console.log('AppComponent:saveCurrentUser() ' + this.user.id + ' : ' + this.user.username);
   }
 
   setCurrentUser(user: User): void {

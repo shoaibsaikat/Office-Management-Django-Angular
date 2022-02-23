@@ -19,15 +19,19 @@ import { AllListComponent as AssetAllListComponent } from './components/asset/al
 import { PendingListComponent as AssetPendingListComponent } from './components/asset/pending-list/pending-list.component';
 import { CreateComponent as AssetCreateComponent } from './components/asset/create/create.component';
 import { EditComponent as AssetEditComponent } from './components/asset/edit/edit.component';
-import { ListComponent } from './components/inventory/list/list.component';
+import { ListComponent as InventoryListComponent } from './components/inventory/list/list.component';
 import { CreateComponent as InventoryCreateComponent } from './components/inventory/create/create.component';
 import { EditComponent as InventoryEditComponent } from './components/inventory/edit/edit.component';
-import { CreateComponent } from './components/requisition/create/create.component';
-import { HistoryComponent } from './components/requisition/history/history.component';
+import { CreateComponent as RequisitionCreateComponent } from './components/requisition/create/create.component';
+import { HistoryComponent as RequisitionHistoryComponent } from './components/requisition/history/history.component';
 import { MyListComponent as RequisitionMyListComponent } from './components/requisition/my-list/my-list.component';
 import { DetailComponent as RequisitionDetailComponent } from './components/requisition/detail/detail.component';
-import { PendingApprovalComponent } from './components/requisition/pending-approval/pending-approval.component';
-import { PendingDistributionComponent } from './components/requisition/pending-distribution/pending-distribution.component';
+import { PendingApprovalComponent as RequisitionPendingApprovalComponent } from './components/requisition/pending-approval/pending-approval.component';
+import { PendingDistributionComponent as RequisitionPendingDistributionComponent } from './components/requisition/pending-distribution/pending-distribution.component';
+import { MyListComponent as LeaveMyListComponent } from './components/leave/my-list/my-list.component';
+import { DetailComponent as LeaveDetailComponent } from './components/leave/detail/detail.component';
+import { RequestListComponent as LeaveRequestListComponent } from './components/leave/request-list/request-list.component';
+import { SummaryComponent as LeaveSummaryComponent } from './components/leave/summary/summary.component';
 
 @NgModule({
   declarations: [
@@ -44,15 +48,19 @@ import { PendingDistributionComponent } from './components/requisition/pending-d
     AssetPendingListComponent,
     AssetCreateComponent,
     AssetEditComponent,
-    ListComponent,
+    InventoryListComponent,
     InventoryCreateComponent,
     InventoryEditComponent,
-    CreateComponent,
-    HistoryComponent,
+    RequisitionCreateComponent,
+    RequisitionHistoryComponent,
     RequisitionMyListComponent,
     RequisitionDetailComponent,
-    PendingApprovalComponent,
-    PendingDistributionComponent,
+    RequisitionPendingApprovalComponent,
+    RequisitionPendingDistributionComponent,
+    LeaveMyListComponent,
+    LeaveDetailComponent,
+    LeaveRequestListComponent,
+    LeaveSummaryComponent,
   ],
   imports: [
     BrowserModule,

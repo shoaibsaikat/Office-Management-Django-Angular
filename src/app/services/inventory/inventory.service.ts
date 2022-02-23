@@ -22,7 +22,7 @@ export class InventoryService {
 
   private baseUrl: string = this.common.getBaseUrl().concat('inventory/');
   private listUrl: string = this.baseUrl.concat('?page=1');
-  private chartlistUrl: string = this.baseUrl.concat('inventory_list');
+  private chartlistUrl: string = this.baseUrl.concat('inventory_list/');
   private quickEditUrl: string = this.baseUrl.concat('quick_edit/');
   private createUrl: string = this.baseUrl.concat('create/');
   private editUrl: string = this.baseUrl.concat('edit/');
