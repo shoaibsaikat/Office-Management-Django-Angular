@@ -34,9 +34,16 @@ export class PendingDistributionComponent implements OnInit {
     });
   }
 
-  onClick(item: Requisition): void {
+  onDetailClick(item: Requisition): void {
     this.requisitionService.setCurrentRequisition(item);
     this.appComponent.navigate('requisition/detail/' + Common.DETAIL_DISTRIBUTION);
+  }
+
+  onApproveClick(index: number): void {
+    this.requisitionService.distribute(this.requisitionList[index].id).subscribe(data => {
+      this.appComponent.navigate('requisition/distribution');
+      this.requisitionList.splice(index, 1);
+    });
   }
 
 }

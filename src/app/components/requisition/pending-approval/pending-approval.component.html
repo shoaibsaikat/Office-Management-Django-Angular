@@ -15,20 +15,29 @@
                     <th scope="col">Request</th>
                     <th scope="col">User</th>
                     <th scope="col">Item</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Requested at</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">Requested</th>
+                    <th scope="col">Select distributor</th>
                 </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let item of requisitionList; let i=index;">
                         <td>{{i+1}}</td>
-                        <td><a class="link-primary" (click)="onClick(item)" style="cursor: pointer;">{{item.title}}</a></td>
+                        <td><a class="link-primary" (click)="onDetailClick(item)" style="cursor: pointer;">{{item.title}}</a></td>
                         <td>{{item.user_name}}</td>
-                        <td>{{item.item_name}}</td>
-                        <td>{{item.amount}}</td>
+                        <td>{{item.amount}} {{item.item_name}}</td>
                         <td>{{item.date|date}}</td>
-                        <td>Action
+                        <td>
+                            <form class="row" [formGroup]="requisitionFormList[i]" (ngSubmit)="onApproveClick(i)">
+                                <div class="col-md-8">
+                                    <select class="form-select" formControlName="distributor">
+                                        <option value="" disabled>Choose distributor</option>
+                                        <option *ngFor="let user of distributorList" [ngValue]="user.id">{{user.first_name}} {{user.last_name}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-cyan" [disabled]="!isDistributorSelected(i)">Approve</button>
+                                </div>
+                            </form>
                         </td>
                     </tr>
                 </tbody>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { RequisitionService } from 'src/app/services/requisition/requisition.service';
 import { MessageService } from 'src/app/services/message/message.service';
@@ -18,6 +19,7 @@ export class PendingApprovalComponent implements OnInit {
 
   requisitionList: Requisition[] = [];
   distributorList: User[] = [];
+  requisitionFormList: FormGroup[] = [];
 
   constructor(private requisitionService: RequisitionService, private messageService: MessageService, private appComponent: AppComponent) { }
 
@@ -39,14 +41,32 @@ export class PendingApprovalComponent implements OnInit {
             this.distributorList.push(element);
           }
         });
+
+        // generate form groups
+        this.requisitionList.forEach(element => {
+          this.requisitionFormList.push(new FormGroup({
+            distributor: new FormControl('', [Validators.required, ]),
+          }));
+        });
       }
     });
   }
 
-  onClick(item: Requisition): void {
+  onDetailClick(item: Requisition): void {
     this.requisitionService.setCurrentRequisition(item);
     this.requisitionService.setDistributorList(this.distributorList);
     this.appComponent.navigate('requisition/detail/' + Common.DETAIL_APPROVAL);
+  }
+
+  onApproveClick(index: number): void {
+    this.requisitionService.approve(this.requisitionList[index].id, this.requisitionFormList[index].get('distributor')?.value).subscribe(data => {
+      this.requisitionList.splice(index, 1);
+      this.requisitionFormList.splice(index, 1);
+    });
+  }
+
+  isDistributorSelected(index: number): boolean {
+    return true ? this.requisitionFormList[index].get('distributor')?.value : false;
   }
 
 }
