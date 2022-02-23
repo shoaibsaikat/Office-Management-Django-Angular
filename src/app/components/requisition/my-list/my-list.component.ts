@@ -22,13 +22,13 @@ export class MyListComponent implements OnInit {
   ngOnInit(): void {
     this.requisitionService.getMyRequisitionList().subscribe({
       next: (v) => {
-        // console.log('ListComponent: ' + JSON.stringify(v));
+        //console.log('MyListComponent: ' + JSON.stringify(v));
         let objRequisitionList: Requisition[] = JSON.parse(JSON.parse(JSON.stringify(v)).requisition_list);
 
         objRequisitionList.forEach(element => {
           if (element) {
             this.requisitionList.push(element);
-            // console.log('ListComponent: id ' + element.id + ':' + element.name);
+            // console.log('MyListComponent: id ' + element.id + ':' + element.name);
           }
         });
       }

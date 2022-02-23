@@ -18,6 +18,7 @@ export class LeaveService {
   private baseUrl: string = this.common.getBaseUrl().concat('leave/');
   private createUrl: string = this.baseUrl.concat('create/');
   private myListUrl: string = this.baseUrl.concat('my_list/');
+  private leaveSummaryUrl: string = this.baseUrl.concat('summary/2021/');
 
   constructor(private http: HttpClient) { }
 
