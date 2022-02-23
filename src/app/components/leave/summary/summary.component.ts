@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
+import { LeaveService } from 'src/app/services/leave/leave.service';
+import { MessageService } from 'src/app/services/message/message.service';
+
+import { AppComponent } from 'src/app/app.component';
+
+import { LeaveSummary } from 'src/app/shared/types/leave_summary';
+
 @Component({
   selector: 'app-summary',
   templateUrl: './summary.component.html',
@@ -7,9 +14,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SummaryComponent implements OnInit {
 
-  constructor() { }
+  leaveList: LeaveSummary[] = [];
+
+  constructor(private leaveService: LeaveService, private messageService: MessageService, private appComponent: AppComponent) { }
 
   ngOnInit(): void {
+    this.leaveService.getLeaveSummaryList().subscribe({
+      next: (v) => {
+        console.log('SummaryComponent: ' + JSON.stringify(v));
+        let leaveList: LeaveSummary[] = JSON.parse(JSON.parse(JSON.stringify(v)).leave_list);
+
+        leaveList.forEach(element => {
+          if (element) {
+            this.leaveList.push(element);
+            console.log('SummaryComponent: user ' + element.user + ':' + element.days);
+          }
+        });
+
+
+          // JSON.parse(JSON.stringify(element), function (key, value) {
+          // });
+
+      }
+    });
   }
 
 }

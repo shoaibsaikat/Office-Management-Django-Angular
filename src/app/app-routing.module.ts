@@ -21,6 +21,8 @@ import { PendingApprovalComponent } from './components/requisition/pending-appro
 import { PendingDistributionComponent } from './components/requisition/pending-distribution/pending-distribution.component';
 import { MyListComponent as LeaveMyListComponent } from './components/leave/my-list/my-list.component';
 import { DetailComponent as LeaveDetailComponent } from './components/leave/detail/detail.component';
+import { RequestListComponent as LeaveRequestListComponent } from './components/leave/request-list/request-list.component';
+import { SummaryComponent as LeaveSummaryComponent } from './components/leave/summary/summary.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -44,6 +46,8 @@ const routes: Routes = [
   { path: 'requisition/distribution', component: PendingDistributionComponent },
   { path: 'leave/my_list', component: LeaveMyListComponent },
   { path: 'leave/detail', component: LeaveDetailComponent },
+  { path: 'leave/request_list', component: LeaveRequestListComponent },
+  { path: 'leave/summary_list', component: LeaveSummaryComponent },
 ];
 
 @NgModule({

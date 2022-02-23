@@ -1,1 +1,49 @@
-<p>summary works!</p>
+<div class="row">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-10">
+            <h3>Item List</h3>
+            </div>
+            <div class="col-md-2 float-right">
+                <a class="btn btn-cyan" routerLink="/inventory/create">Create Item</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">User</th>
+                    <th scope="col">Days</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of leaveList; let i=index;">
+                        <td>{{i+1}}</td>
+                        <td>{{item.user__first_name}} {{item.user__last_name}}</td>
+                        <td>{{item.days}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <span class="step-links">
+                    <!-- {% if page_obj.has_previous %} -->
+                        <a href="?page=1">&laquo; first</a>
+                        <a href="?page=#">previous</a>
+                    <!-- {% endif %} -->
+
+                    <span class="current">
+                        <!-- Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}. -->
+                    </span>
+
+                    <!-- {% if page_obj.has_next %} -->
+                        <a href="?page=#">next</a>
+                        <a href="?page=#">last &raquo;</a>
+                    <!-- {% endif %} -->
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
