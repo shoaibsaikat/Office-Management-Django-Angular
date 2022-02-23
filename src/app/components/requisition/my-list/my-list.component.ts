@@ -6,6 +6,7 @@ import { MessageService } from 'src/app/services/message/message.service';
 import { AppComponent } from 'src/app/app.component';
 
 import { Requisition } from 'src/app/shared/types/requisition';
+import { Common } from 'src/app/shared/common';
 
 @Component({
   selector: 'app-my-list',
@@ -36,7 +37,7 @@ export class MyListComponent implements OnInit {
 
   onClick(item: Requisition): void {
     this.requisitionService.setCurrentRequisition(item);
-    this.appComponent.navigate('requisition/detail');
+    this.appComponent.navigate('requisition/detail/' + Common.DETAIL_NORMAL);
   }
 
 }

@@ -35,7 +35,7 @@ const routes: Routes = [
   { path: 'inventory/create', component: InventoryCreateComponent },
   { path: 'inventory/edit', component: InventoryEditComponent },
   { path: 'requisition/history', component: HistoryComponent },
-  { path: 'requisition/detail', component: RequisitionDetailComponent },
+  { path: 'requisition/detail/:state', component: RequisitionDetailComponent },
   { path: 'requisition/my_list', component: RequisitionMyListComponent },
   { path: 'requisition/create', component: RequisitionCreateComponent },
   { path: 'requisition/approval', component: PendingApprovalComponent },

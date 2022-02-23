@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Common } from '../../shared/common';
+import { User } from 'src/app/shared/types/user';
 import { Requisition } from 'src/app/shared/types/requisition';
 
 @Injectable({
@@ -26,6 +27,7 @@ export class RequisitionService {
     user: 0,
     user_name: '',
   };
+  private distributorList: User[] = [];
 
   private baseUrl: string = this.common.getBaseUrl().concat('inventory/requisition/');
   private historyUrl: string = this.baseUrl.concat('history/');
@@ -69,7 +71,7 @@ export class RequisitionService {
     return this.http.get<string>(this.approvalUrl, this.common.getHttpHeader());
   }
 
-  setDistributor(id: number, distributor: number): Observable<string> {
+  approve(id: number, distributor: number): Observable<string> {
     return this.http.post<string>(this.approvalUrl, {
       pk: id,
       distributor: distributor,
@@ -92,5 +94,13 @@ export class RequisitionService {
 
   getCurrentRequisition(): Requisition {
     return this.currentRequisition;
+  }
+
+  setDistributorList(users: User[]): void {
+    this.distributorList = users;
+  }
+
+  getDistributorList(): User[] {
+    return this.distributorList;
   }
 }

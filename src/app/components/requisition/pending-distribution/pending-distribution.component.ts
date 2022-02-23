@@ -5,6 +5,7 @@ import { MessageService } from 'src/app/services/message/message.service';
 
 import { AppComponent } from 'src/app/app.component';
 
+import { Common } from 'src/app/shared/common';
 import { Requisition } from 'src/app/shared/types/requisition';
 
 @Component({
@@ -35,7 +36,7 @@ export class PendingDistributionComponent implements OnInit {
 
   onClick(item: Requisition): void {
     this.requisitionService.setCurrentRequisition(item);
-    this.appComponent.navigate('requisition/detail');
+    this.appComponent.navigate('requisition/detail/' + Common.DETAIL_DISTRIBUTION);
   }
 
 }
