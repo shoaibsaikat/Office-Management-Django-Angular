@@ -61,4 +61,8 @@ export class LeaveService {
       user_last_name: '',
     }
   }
+
+  getLeaveCreationData(): Observable<string> {
+    return this.http.get<string>(this.createUrl, this.common.getHttpHeader());
+  }
 }

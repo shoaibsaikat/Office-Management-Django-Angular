@@ -86,7 +86,7 @@
             <div class="card-header bg-info bg-opacity-50"><strong>Leave</strong></div>
             <div class="card-body">
               <div class="list-group">
-                <a class="nav-link list-group-item" href="#">Apply</a>
+                <a class="nav-link list-group-item" routerLink="/leave/create">Apply</a>
                 <a class="nav-link list-group-item" routerLink="/leave/my_list">Mine</a>
                 <a *ngIf="user.can_approve_leave" class="nav-link list-group-item" routerLink="/leave/summary_list">Summary</a>
                 <a *ngIf="user.can_approve_leave" class="nav-link list-group-item" routerLink="/leave/request_list">Incoming</a>

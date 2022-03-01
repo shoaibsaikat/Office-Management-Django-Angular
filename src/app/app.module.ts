@@ -32,6 +32,7 @@ import { MyListComponent as LeaveMyListComponent } from './components/leave/my-l
 import { DetailComponent as LeaveDetailComponent } from './components/leave/detail/detail.component';
 import { RequestListComponent as LeaveRequestListComponent } from './components/leave/request-list/request-list.component';
 import { SummaryComponent as LeaveSummaryComponent } from './components/leave/summary/summary.component';
+import { CreateComponent as LeaveCreateComponent } from './components/leave/create/create.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { SummaryComponent as LeaveSummaryComponent } from './components/leave/su
     LeaveDetailComponent,
     LeaveRequestListComponent,
     LeaveSummaryComponent,
+    LeaveCreateComponent,
   ],
   imports: [
     BrowserModule,

@@ -23,6 +23,7 @@ import { MyListComponent as LeaveMyListComponent } from './components/leave/my-l
 import { DetailComponent as LeaveDetailComponent } from './components/leave/detail/detail.component';
 import { RequestListComponent as LeaveRequestListComponent } from './components/leave/request-list/request-list.component';
 import { SummaryComponent as LeaveSummaryComponent } from './components/leave/summary/summary.component';
+import { CreateComponent as LeaveCreateComponent } from './components/leave/create/create.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -48,6 +49,7 @@ const routes: Routes = [
   { path: 'leave/detail', component: LeaveDetailComponent },
   { path: 'leave/request_list', component: LeaveRequestListComponent },
   { path: 'leave/summary_list', component: LeaveSummaryComponent },
+  { path: 'leave/create', component: LeaveCreateComponent },
 ];
 
 @NgModule({

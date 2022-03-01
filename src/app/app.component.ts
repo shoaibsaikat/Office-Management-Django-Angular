@@ -78,7 +78,7 @@ export class AppComponent {
       localStorage.setItem('can_approve_leave', this.user.can_approve_leave?.toString() || 'false');
       localStorage.setItem('can_distribute_inventory', this.user.can_distribute_inventory?.toString() || 'false');
       localStorage.setItem('can_manage_asset', this.user.can_manage_asset?.toString() || 'false');
-      console.log('AppComponent:saveCurrentUser() ' + this.user.can_manage_asset);
+      // console.log('AppComponent:saveCurrentUser() ' + this.user.can_manage_asset);
     } else {
       localStorage.setItem('token', '');
     }
