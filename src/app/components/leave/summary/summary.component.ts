@@ -21,20 +21,15 @@ export class SummaryComponent implements OnInit {
   ngOnInit(): void {
     this.leaveService.getLeaveSummaryList().subscribe({
       next: (v) => {
-        console.log('SummaryComponent: ' + JSON.stringify(v));
+        // console.log('SummaryComponent: ' + JSON.stringify(v));
         let leaveList: LeaveSummary[] = JSON.parse(JSON.parse(JSON.stringify(v)).leave_list);
 
         leaveList.forEach(element => {
           if (element) {
             this.leaveList.push(element);
-            console.log('SummaryComponent: user ' + element.user + ':' + element.days);
+            // console.log('SummaryComponent: ' + element.user + ':' + element.first_name);
           }
         });
-
-
-          // JSON.parse(JSON.stringify(element), function (key, value) {
-          // });
-
       }
     });
   }
