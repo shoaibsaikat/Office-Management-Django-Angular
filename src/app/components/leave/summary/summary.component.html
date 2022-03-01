@@ -1,11 +1,18 @@
 <div class="row">
     <div class="card-header">
         <div class="row">
-            <div class="col-md-10">
-            <h3>Item List</h3>
+            <div class="col-md-8">
+            <h3>Leave history {{selectedYear}}</h3>
             </div>
-            <div class="col-md-2 float-right">
-                <a class="btn btn-cyan" routerLink="/inventory/create">Create Item</a>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-8">
+                        <input class="form-control" type="number" [(ngModel)]="selectedYear">
+                    </div>
+                    <div class="col-md-4">
+                        <a class="btn btn-cyan" (click)="onYearSelect()">Select</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

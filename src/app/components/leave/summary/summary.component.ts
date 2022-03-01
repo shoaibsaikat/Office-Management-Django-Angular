@@ -15,15 +15,24 @@ import { LeaveSummary } from 'src/app/shared/types/leave_summary';
 export class SummaryComponent implements OnInit {
 
   leaveList: LeaveSummary[] = [];
+  selectedYear: number = new Date().getFullYear();
 
   constructor(private leaveService: LeaveService, private messageService: MessageService, private appComponent: AppComponent) { }
 
   ngOnInit(): void {
-    this.leaveService.getLeaveSummaryList().subscribe({
+    this.updateHistory();
+  }
+
+  onYearSelect(): void {
+    this.updateHistory();
+  }
+
+  updateHistory(): void {
+    this.leaveService.getLeaveSummaryList(this.selectedYear).subscribe({
       next: (v) => {
         // console.log('SummaryComponent: ' + JSON.stringify(v));
         let leaveList: LeaveSummary[] = JSON.parse(JSON.parse(JSON.stringify(v)).leave_list);
-
+        this.leaveList = [];
         leaveList.forEach(element => {
           if (element) {
             this.leaveList.push(element);

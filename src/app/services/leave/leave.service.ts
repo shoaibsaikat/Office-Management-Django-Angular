@@ -19,7 +19,7 @@ export class LeaveService {
   private createUrl: string = this.baseUrl.concat('create/');
   private myListUrl: string = this.baseUrl.concat('my_list/');
   private requestListUrl: string = this.baseUrl.concat('request_list/');
-  private leaveSummaryUrl: string = this.baseUrl.concat('summary/2021/');
+  private leaveSummaryUrl: string = this.baseUrl.concat('summary/');
 
   constructor(private http: HttpClient) { }
 
@@ -31,8 +31,9 @@ export class LeaveService {
     return this.http.get<string>(this.requestListUrl, this.common.getHttpHeader());
   }
 
-  getLeaveSummaryList(): Observable<string> {
-    return this.http.get<string>(this.leaveSummaryUrl, this.common.getHttpHeader());
+  getLeaveSummaryList(year: number): Observable<string> {
+    let leaveSummaryYearUrl = this.leaveSummaryUrl.concat(year + '/');
+    return this.http.get<string>(leaveSummaryYearUrl, this.common.getHttpHeader());
   }
 
   getCurrentLeave(): Leave {
