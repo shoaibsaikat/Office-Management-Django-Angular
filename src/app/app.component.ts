@@ -99,6 +99,10 @@ export class AppComponent {
     this.user.can_manage_asset = user.can_manage_asset;
   }
 
+  getCurrentUser(): User {
+    return this.user;
+  }
+
   setError(msg: string): void {
     this.errorMsg = msg;
   }
