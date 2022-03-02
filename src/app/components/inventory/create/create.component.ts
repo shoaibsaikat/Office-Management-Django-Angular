@@ -34,7 +34,7 @@ export class CreateComponent implements OnInit {
   }
 
   onSubmit(): void {
-    let item:Inventory = {
+    let item: Inventory = {
       id: -1,
       name: this.name?.value,
       count: this.count?.value,

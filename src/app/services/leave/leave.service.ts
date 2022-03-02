@@ -20,6 +20,7 @@ export class LeaveService {
   private myListUrl: string = this.baseUrl.concat('my_list/');
   private requestListUrl: string = this.baseUrl.concat('request_list/');
   private leaveSummaryUrl: string = this.baseUrl.concat('summary/');
+  private approvalUrl: string = this.baseUrl.concat('approve/');
 
   constructor(private http: HttpClient) { }
 
@@ -64,5 +65,20 @@ export class LeaveService {
 
   getLeaveCreationData(): Observable<string> {
     return this.http.get<string>(this.createUrl, this.common.getHttpHeader());
+  }
+
+  createLeave(leave: any): Observable<string> {
+    return this.http.post<string>(this.createUrl, {
+      title: leave.title,
+      start: leave.start,
+      end: leave.end,
+      days: leave.days,
+      comment: leave.comment,
+    }, this.common.getHttpHeader());
+  }
+
+  approveLeave(id: number): Observable<string> {
+    let approvalUrl = this.approvalUrl.concat(id + '/');
+    return this.http.post<string>(approvalUrl, null, this.common.getHttpHeader());
   }
 }

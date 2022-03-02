@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
-
-import { map } from 'rxjs/operators';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -23,43 +20,60 @@ export class CreateComponent implements OnInit {
   leaveForm: FormGroup = new FormGroup({
     title: new FormControl('', [Validators.required, ]),
     start: new FormControl('', [Validators.required, ]),
-    count: new FormControl('', [Validators.required, ]),
+    end: new FormControl('', [Validators.required, ]),
     comment: new FormControl('', [Validators.required, ]),
   });
   get title() { return this.leaveForm.get('title'); }
   get start() { return this.leaveForm.get('start'); }
-  get count() { return this.leaveForm.get('count'); }
+  get end() { return this.leaveForm.get('end'); }
   get comment() { return this.leaveForm.get('comment'); }
+
+  days: number = 0;
 
   constructor(private leaveService: LeaveService, private messageService: MessageService, private appComponent: AppComponent) { }
 
   ngOnInit(): void {
     this.leaveService.getLeaveCreationData().subscribe({
-        next: (v) => {
-          // console.log('CreateComponent: ' + v);
-        }, error: (e) => {
-          // console.error('CreateComponent: Error ' + e);
+        next: (v) => { }, error: (e) => {
           this.appComponent.navigate('account/manager');
-        }, complete: () => {
-          // console.info('complete');
-        }
+        }, complete: () => { }
     });
   }
 
+  areDatesInvalid(): boolean {
+    let current = new Date();
+    let start = new Date(this.start?.value);
+    let end = new Date(this.end?.value);
+    if (start && end &&
+      start <= end &&
+      (start.getMonth() > current.getMonth() || (start.getMonth() == current.getMonth() && start.getDate() >= current.getDate()))) {
+      this.days = this.getDays();
+      return false;
+    }
+    return true;
+  }
+
+  getDays(): number {
+    let start = new Date(this.start?.value);
+    let end = new Date(this.end?.value);
+    let differenceInTime = end.getTime() - start.getTime();
+    return (differenceInTime / (1000 * 3600 * 24)) + 1;
+  }
+
   onSubmit(): void {
-    // let item:Leave = {
-    //   id: -1,
-    //   name: this.name?.value,
-    //   count: this.count?.value,
-    //   unit: this.unit?.value,
-    //   description: this.description?.value,
-    // }
-    // // console.log('CreateComponent: item.name: ' + this.name?.value);
-    // this.inventoryService.createInventoryItem(item).subscribe(data => {
-    //   let msg: Message = JSON.parse(JSON.stringify(data));
-    //   this.messageService.add(msg.detail);
-    //   this.appComponent.navigate('/inventory/list');
-    // });
+    this.days = this.getDays();
+    let leave: any = {
+      title: this.title?.value,
+      start: this.start?.value,
+      end: this.end?.value,
+      days: this.days,
+      comment: this.comment?.value,
+    }
+    this.leaveService.createLeave(leave).subscribe(data => {
+      let msg: Message = JSON.parse(JSON.stringify(data));
+      this.messageService.add(msg.detail);
+      this.appComponent.navigate('/leave/my_list');
+    });
 
   }
 

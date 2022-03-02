@@ -15,12 +15,15 @@
             </div>
         </div>
         <div class="mb-3">
-            <label class="form-label" for="id_count">Days</label>
-            <input type="number" name="count" class="form-control" placeholder="Amount" required id="id_count" min="0" formControlName="count">
-            <div *ngIf="count?.invalid && (count?.dirty || count?.touched)" class="alert alert-danger">
-                <div *ngIf="count?.errors?.required">Amount of days are required.</div>
-                <div *ngIf="count?.errors?.min">0 is the minimum value.</div>
+            <label class="form-label" for="id_end">End date</label>
+            <input type="date" name="end" class="form-control" placeholder="End" required id="id_end" formControlName="end">
+            <div *ngIf="(end?.invalid || areDatesInvalid()) && (end?.dirty || end?.touched)" class="alert alert-danger">
+                <div *ngIf="end?.errors?.required">End date is required.</div>
+                <div *ngIf="areDatesInvalid()">Dates are invalid.</div>
             </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">{{days}} day(s) leave</label>
         </div>
         <div class="mb-3">
             <label class="form-label" for="id_comment">Comment</label>
@@ -29,6 +32,6 @@
                 <div *ngIf="comment?.errors?.required">Comment is required.</div>
             </div>
         </div>
-        <button type="submit" class="btn btn-cyan" [disabled]="title?.errors || count?.errors || comment?.errors">Save</button>
+        <button type="submit" class="btn btn-cyan" [disabled]="title?.errors || start?.errors || end?.errors || areDatesInvalid() || comment?.errors">Save</button>
     </form>
 </div>
