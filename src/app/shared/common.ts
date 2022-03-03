@@ -7,6 +7,7 @@ export class Common {
     static readonly DETAIL_NORMAL: number = 0;
     static readonly DETAIL_APPROVAL: number = 1;
     static readonly DETAIL_DISTRIBUTION: number = 2;
+    static readonly PAGE_SIZE = 10;
 
     constructor(private http: HttpClient) { }
 

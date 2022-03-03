@@ -5,7 +5,8 @@ import { MessageService } from 'src/app/services/message/message.service';
 
 import { AppComponent } from 'src/app/app.component';
 
-import { Leave } from '../../../shared/types/leave';
+import { Leave } from 'src/app/shared/types/leave';
+import { Common } from 'src/app/shared/common';
 
 @Component({
   selector: 'app-my-list',
@@ -16,13 +17,24 @@ export class MyListComponent implements OnInit {
 
   leaveList: Leave[] = [];
 
+  // pagination, NOTE: pagination is by 10 in server side and can't be set from client
+  listCount: number = 0;
+  currentPage: number = 1;
+  totalPage: number = 1;
+
   constructor(private leaveService: LeaveService, private messageService: MessageService, private appComponent: AppComponent) { }
 
   ngOnInit(): void {
-    this.leaveService.getMyLeaveList().subscribe({
+    this.getMyLeaveList();
+  }
+
+  getMyLeaveList(): void {
+    this.leaveService.getMyLeaveList(this.currentPage).subscribe({
       next: (v) => {
         // console.log('MyListComponent: ' + JSON.stringify(v));
         let leaveList: Leave[] = JSON.parse(JSON.parse(JSON.stringify(v)).leave_list);
+        this.listCount = JSON.parse(JSON.parse(JSON.stringify(v)).count);
+        this.totalPage = Math.ceil(this.listCount / Common.PAGE_SIZE);
 
         leaveList.forEach(element => {
           if (element) {
@@ -37,6 +49,34 @@ export class MyListComponent implements OnInit {
   onClick(item: Leave): void {
     this.leaveService.setCurrentLeave(item);
     this.appComponent.navigate('leave/detail');
+  }
+
+  onFirstClick(): void {
+    this.currentPage = 1;
+    this.getMyLeaveList();
+  }
+
+  onLastClick(): void {
+    this.currentPage = this.totalPage;
+    this.getMyLeaveList();
+  }
+
+  onPreviousClick(): void {
+    --this.currentPage;
+    this.getMyLeaveList();
+  }
+
+  onNextClick(): void {
+    ++this.currentPage;
+    this.getMyLeaveList();
+  }
+
+  hasNextPage(): boolean {
+    return !(this.currentPage * Common.PAGE_SIZE >= this.totalPage);
+  }
+
+  hasPreviousPage(): boolean {
+    return (this.currentPage * Common.PAGE_SIZE > Common.PAGE_SIZE);
   }
 
 }

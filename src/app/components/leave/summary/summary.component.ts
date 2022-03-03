@@ -4,6 +4,7 @@ import { LeaveService } from 'src/app/services/leave/leave.service';
 import { MessageService } from 'src/app/services/message/message.service';
 
 import { AppComponent } from 'src/app/app.component';
+import { Common } from 'src/app/shared/common';
 
 import { LeaveSummary } from 'src/app/shared/types/leave_summary';
 
@@ -17,6 +18,11 @@ export class SummaryComponent implements OnInit {
   leaveList: LeaveSummary[] = [];
   selectedYear: number = new Date().getFullYear();
 
+  // pagination, NOTE: pagination is by 10 in server side and can't be set from client
+  listCount: number = 0;
+  currentPage: number = 1;
+  totalPage: number = 1;
+
   constructor(private leaveService: LeaveService, private messageService: MessageService, private appComponent: AppComponent) { }
 
   ngOnInit(): void {
@@ -28,10 +34,13 @@ export class SummaryComponent implements OnInit {
   }
 
   updateHistory(): void {
-    this.leaveService.getLeaveSummaryList(this.selectedYear).subscribe({
+    this.leaveService.getLeaveSummaryList(this.selectedYear, this.currentPage).subscribe({
       next: (v) => {
         // console.log('SummaryComponent: ' + JSON.stringify(v));
         let leaveList: LeaveSummary[] = JSON.parse(JSON.parse(JSON.stringify(v)).leave_list);
+        this.listCount = JSON.parse(JSON.parse(JSON.stringify(v)).count);
+        this.totalPage = Math.ceil(this.listCount / Common.PAGE_SIZE);
+
         this.leaveList = [];
         leaveList.forEach(element => {
           if (element) {
@@ -41,6 +50,34 @@ export class SummaryComponent implements OnInit {
         });
       }
     });
+  }
+
+  onFirstClick(): void {
+    this.currentPage = 1;
+    this.updateHistory();
+  }
+
+  onLastClick(): void {
+    this.currentPage = this.totalPage;
+    this.updateHistory();
+  }
+
+  onPreviousClick(): void {
+    --this.currentPage;
+    this.updateHistory();
+  }
+
+  onNextClick(): void {
+    ++this.currentPage;
+    this.updateHistory();
+  }
+
+  hasNextPage(): boolean {
+    return !(this.currentPage * Common.PAGE_SIZE >= this.totalPage);
+  }
+
+  hasPreviousPage(): boolean {
+    return (this.currentPage * Common.PAGE_SIZE > Common.PAGE_SIZE);
   }
 
 }
