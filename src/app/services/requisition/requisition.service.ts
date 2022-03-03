@@ -39,12 +39,14 @@ export class RequisitionService {
 
   constructor(private http: HttpClient) { }
 
-  getHistory(): Observable<string> {
-    return this.http.get<string>(this.historyUrl, this.common.getHttpHeader());
+  getHistory(page: number = 1): Observable<string> {
+    let historyUrl = this.historyUrl.concat('?page=' + page);
+    return this.http.get<string>(historyUrl, this.common.getHttpHeader());
   }
 
-  getMyRequisitionList(): Observable<string> {
-    return this.http.get<string>(this.myRequisitionUrl, this.common.getHttpHeader());
+  getMyRequisitionList(page: number = 1): Observable<string> {
+    let myRequisitionUrl = this.myRequisitionUrl.concat('?page=' + page);
+    return this.http.get<string>(myRequisitionUrl, this.common.getHttpHeader());
   }
 
   getDetail(item: number): Observable<string> {
@@ -67,8 +69,9 @@ export class RequisitionService {
     }, this.common.getHttpHeader());
   }
 
-  getApprovalList(): Observable<string> {
-    return this.http.get<string>(this.approvalUrl, this.common.getHttpHeader());
+  getApprovalList(page: number = 1): Observable<string> {
+    let approvalUrl = this.approvalUrl.concat('?page=' + page);
+    return this.http.get<string>(approvalUrl, this.common.getHttpHeader());
   }
 
   approve(id: number, distributor: number): Observable<string> {
@@ -78,8 +81,9 @@ export class RequisitionService {
     }, this.common.getHttpHeader());
   }
 
-  getDistributionList(): Observable<string> {
-    return this.http.get<string>(this.distributionUrl, this.common.getHttpHeader());
+  getDistributionList(page: number = 1): Observable<string> {
+    let distributionUrl = this.distributionUrl.concat('?page=' + page);
+    return this.http.get<string>(distributionUrl, this.common.getHttpHeader());
   }
 
   distribute(id: number): Observable<string> {

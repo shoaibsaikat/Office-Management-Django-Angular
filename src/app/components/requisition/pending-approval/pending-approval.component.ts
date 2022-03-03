@@ -6,9 +6,9 @@ import { MessageService } from 'src/app/services/message/message.service';
 
 import { AppComponent } from 'src/app/app.component';
 
-import { Common } from 'src/app/shared/common';
 import { Requisition } from 'src/app/shared/types/requisition';
 import { User } from 'src/app/shared/types/user';
+import { Common } from 'src/app/shared/common';
 
 @Component({
   selector: 'app-pending-approval',
@@ -21,14 +21,25 @@ export class PendingApprovalComponent implements OnInit {
   distributorList: User[] = [];
   requisitionFormList: FormGroup[] = [];
 
+  // pagination, NOTE: pagination is by 10 in server side and can't be set from client
+  listCount: number = 0;
+  currentPage: number = 1;
+  totalPage: number = 1;
+
   constructor(private requisitionService: RequisitionService, private messageService: MessageService, private appComponent: AppComponent) { }
 
   ngOnInit(): void {
-    this.requisitionService.getApprovalList().subscribe({
+    this.updateApprovalList();
+  }
+
+  updateApprovalList(): void {
+    this.requisitionService.getApprovalList(this.currentPage).subscribe({
       next: (v) => {
         // console.log('ListComponent: ' + JSON.stringify(v));
         let requisitionList: Requisition[] = JSON.parse(JSON.parse(JSON.stringify(v)).requisition_list);
         let distributorList: User[] = JSON.parse(JSON.parse(JSON.stringify(v)).distributor_list);
+        this.listCount = JSON.parse(JSON.parse(JSON.stringify(v)).count);
+        this.totalPage = Math.ceil(this.listCount / Common.PAGE_SIZE);
 
         requisitionList.forEach(element => {
           if (element) {
@@ -67,6 +78,34 @@ export class PendingApprovalComponent implements OnInit {
 
   isDistributorSelected(index: number): boolean {
     return true ? this.requisitionFormList[index].get('distributor')?.value : false;
+  }
+
+  onFirstClick(): void {
+    this.currentPage = 1;
+    this.updateApprovalList();
+  }
+
+  onLastClick(): void {
+    this.currentPage = this.totalPage;
+    this.updateApprovalList();
+  }
+
+  onPreviousClick(): void {
+    --this.currentPage;
+    this.updateApprovalList();
+  }
+
+  onNextClick(): void {
+    ++this.currentPage;
+    this.updateApprovalList();
+  }
+
+  hasNextPage(): boolean {
+    return !(this.currentPage * Common.PAGE_SIZE >= this.totalPage);
+  }
+
+  hasPreviousPage(): boolean {
+    return (this.currentPage * Common.PAGE_SIZE > Common.PAGE_SIZE);
   }
 
 }

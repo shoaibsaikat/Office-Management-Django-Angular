@@ -38,6 +38,8 @@ export class ListComponent implements OnInit {
       next: (v) => {
         // console.log('ListComponent: ' + JSON.stringify(v));
         let objInventoryList: Inventory[] = JSON.parse(JSON.parse(JSON.stringify(v)).inventory_list);
+        this.listCount = JSON.parse(JSON.parse(JSON.stringify(v)).count);
+        this.totalPage = Math.ceil(this.listCount / Common.PAGE_SIZE);
 
         objInventoryList.forEach(element => {
           if (element) {

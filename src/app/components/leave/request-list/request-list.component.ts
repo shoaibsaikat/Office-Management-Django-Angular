@@ -34,6 +34,8 @@ export class RequestListComponent implements OnInit {
       next: (v) => {
         // console.log('MyListComponent: ' + JSON.stringify(v));
         let leaveList: Leave[] = JSON.parse(JSON.parse(JSON.stringify(v)).leave_list);
+        this.listCount = JSON.parse(JSON.parse(JSON.stringify(v)).count);
+        this.totalPage = Math.ceil(this.listCount / Common.PAGE_SIZE);
 
         leaveList.forEach(element => {
           if (element) {

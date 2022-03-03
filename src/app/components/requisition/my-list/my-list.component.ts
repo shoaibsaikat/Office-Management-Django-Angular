@@ -17,15 +17,26 @@ export class MyListComponent implements OnInit {
 
   requisitionList: Requisition[] = [];
 
+  // pagination, NOTE: pagination is by 10 in server side and can't be set from client
+  listCount: number = 0;
+  currentPage: number = 1;
+  totalPage: number = 1;
+
   constructor(private requisitionService: RequisitionService, private messageService: MessageService, private appComponent: AppComponent) { }
 
   ngOnInit(): void {
-    this.requisitionService.getMyRequisitionList().subscribe({
+    this.updateMyList();
+  }
+
+  updateMyList(): void {
+    this.requisitionService.getMyRequisitionList(this.currentPage).subscribe({
       next: (v) => {
         //console.log('MyListComponent: ' + JSON.stringify(v));
-        let objRequisitionList: Requisition[] = JSON.parse(JSON.parse(JSON.stringify(v)).requisition_list);
+        let requisitionList: Requisition[] = JSON.parse(JSON.parse(JSON.stringify(v)).requisition_list);
+        this.listCount = JSON.parse(JSON.parse(JSON.stringify(v)).count);
+        this.totalPage = Math.ceil(this.listCount / Common.PAGE_SIZE);
 
-        objRequisitionList.forEach(element => {
+        requisitionList.forEach(element => {
           if (element) {
             this.requisitionList.push(element);
             // console.log('MyListComponent: id ' + element.id + ':' + element.name);
@@ -38,6 +49,34 @@ export class MyListComponent implements OnInit {
   onClick(item: Requisition): void {
     this.requisitionService.setCurrentRequisition(item);
     this.appComponent.navigate('requisition/detail/' + Common.DETAIL_NORMAL);
+  }
+
+  onFirstClick(): void {
+    this.currentPage = 1;
+    this.updateMyList();
+  }
+
+  onLastClick(): void {
+    this.currentPage = this.totalPage;
+    this.updateMyList();
+  }
+
+  onPreviousClick(): void {
+    --this.currentPage;
+    this.updateMyList();
+  }
+
+  onNextClick(): void {
+    ++this.currentPage;
+    this.updateMyList();
+  }
+
+  hasNextPage(): boolean {
+    return !(this.currentPage * Common.PAGE_SIZE >= this.totalPage);
+  }
+
+  hasPreviousPage(): boolean {
+    return (this.currentPage * Common.PAGE_SIZE > Common.PAGE_SIZE);
   }
 
 }
