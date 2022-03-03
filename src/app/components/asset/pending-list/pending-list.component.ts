@@ -5,6 +5,7 @@ import { MessageService } from 'src/app/services/message/message.service';
 
 import { Asset } from 'src/app/shared/types/asset';
 import { Message } from 'src/app/shared/types/message';
+import { Common } from 'src/app/shared/common';
 
 @Component({
   selector: 'app-pending-list',
@@ -15,15 +16,26 @@ export class PendingListComponent implements OnInit {
 
   assetList: Asset[] = [];
 
+  // pagination, NOTE: pagination is by 10 in server side and can't be set from client
+  listCount: number = 0;
+  currentPage: number = 1;
+  totalPage: number = 1;
+
   constructor(private assetService: AssetService, private messageService: MessageService) { }
 
   ngOnInit(): void {
-    this.assetService.getPendingAssetList().subscribe({
+    this.updatePendingList();
+  }
+
+  updatePendingList(): void {
+    this.assetService.getPendingAssetList(this.currentPage).subscribe({
       next: (v) => {
         // console.log('MyListComponent: ' + JSON.stringify(v));
-        let objAssetList: Asset[] = JSON.parse(JSON.parse(JSON.stringify(v)).asset_list);
+        let assetList: Asset[] = JSON.parse(JSON.parse(JSON.stringify(v)).asset_list);
+        this.listCount = JSON.parse(JSON.parse(JSON.stringify(v)).count);
+        this.totalPage = Math.ceil(this.listCount / Common.PAGE_SIZE);
 
-        objAssetList.forEach(element => {
+        assetList.forEach(element => {
           if (element) {
             this.assetList.push(element);
             // console.log('MyListComponent: id ' + element.id + ' '  + element.name + ' : ' + element.user);
@@ -53,6 +65,34 @@ export class PendingListComponent implements OnInit {
       // update local data
       this.assetList.splice(index, 1);
     });
+  }
+
+  onFirstClick(): void {
+    this.currentPage = 1;
+    this.updatePendingList();
+  }
+
+  onLastClick(): void {
+    this.currentPage = this.totalPage;
+    this.updatePendingList();
+  }
+
+  onPreviousClick(): void {
+    --this.currentPage;
+    this.updatePendingList();
+  }
+
+  onNextClick(): void {
+    ++this.currentPage;
+    this.updatePendingList();
+  }
+
+  hasNextPage(): boolean {
+    return !(this.currentPage * Common.PAGE_SIZE >= this.totalPage);
+  }
+
+  hasPreviousPage(): boolean {
+    return (this.currentPage * Common.PAGE_SIZE > Common.PAGE_SIZE);
   }
 
 }

@@ -13,24 +13,27 @@ export class AssetService {
   private common: Common = new Common(this.http);
 
   private baseUrl: string = this.common.getBaseUrl().concat('asset/');
-  private myListUrl: string = this.baseUrl.concat('my_list/?page=1');
-  private allListUrl: string = this.baseUrl.concat('list/?page=1');
+  private myListUrl: string = this.baseUrl.concat('my_list/');
+  private allListUrl: string = this.baseUrl.concat('list/');
   private addUrl: string = this.baseUrl.concat('add/');
   private pendingUrl: string = this.baseUrl.concat('my_pending_list/');
   private editUrl: string = this.baseUrl.concat('edit/');
 
   constructor(private http: HttpClient) { }
 
-  getMyAssetList(): Observable<string> {
-    return this.http.get<string>(this.myListUrl, this.common.getHttpHeader());
+  getMyAssetList(page: number = 1): Observable<string> {
+    let myListUrl = this.myListUrl.concat('?page=' + page);
+    return this.http.get<string>(myListUrl, this.common.getHttpHeader());
   }
 
-  getAllAssetList(): Observable<string> {
-    return this.http.get<string>(this.allListUrl, this.common.getHttpHeader());
+  getAllAssetList(page: number = 1): Observable<string> {
+    let allListUrl = this.allListUrl.concat('?page=' + page);
+    return this.http.get<string>(allListUrl, this.common.getHttpHeader());
   }
 
-  getPendingAssetList(): Observable<string> {
-    return this.http.get<string>(this.pendingUrl, this.common.getHttpHeader());
+  getPendingAssetList(page: number = 1): Observable<string> {
+    let pendingUrl = this.pendingUrl.concat('?page=' + page);
+    return this.http.get<string>(pendingUrl, this.common.getHttpHeader());
   }
 
   declinePendingAsset(assetId: number): Observable<string> {

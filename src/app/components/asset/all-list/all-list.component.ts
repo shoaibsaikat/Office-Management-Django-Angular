@@ -5,6 +5,8 @@ import { AssetService } from 'src/app/services/asset/asset.service';
 import { Asset } from 'src/app/shared/types/asset';
 import { AssetViewModel } from 'src/app/shared/types/asset-view-model';
 
+import { Common } from 'src/app/shared/common';
+
 @Component({
   selector: 'app-all-list',
   templateUrl: './all-list.component.html',
@@ -16,17 +18,28 @@ export class AllListComponent implements OnInit {
   statusList: Map<number, string> = new Map<number, string>();
   typeList: Map<number, string> = new Map<number, string>();
 
+  // pagination, NOTE: pagination is by 10 in server side and can't be set from client
+  listCount: number = 0;
+  currentPage: number = 1;
+  totalPage: number = 1;
+
   constructor(private assetService: AssetService) { }
 
   ngOnInit(): void {
-    this.assetService.getAllAssetList().subscribe({
+    this.updateAllList();
+  }
+
+  updateAllList(): void {
+    this.assetService.getAllAssetList(this.currentPage).subscribe({
       next: (v) => {
         // console.log('MyListComponent: ' + JSON.stringify(v));
-        let objAssetList: Asset[] = JSON.parse(JSON.parse(JSON.stringify(v)).asset_list);
-        let objStatusList: string[] = JSON.parse(JSON.parse(JSON.stringify(v)).status);
-        let objTypeList: string[] = JSON.parse(JSON.parse(JSON.stringify(v)).type);
+        let assetList: Asset[] = JSON.parse(JSON.parse(JSON.stringify(v)).asset_list);
+        let statusList: string[] = JSON.parse(JSON.parse(JSON.stringify(v)).status);
+        let typeList: string[] = JSON.parse(JSON.parse(JSON.stringify(v)).type);
+        this.listCount = JSON.parse(JSON.parse(JSON.stringify(v)).count);
+        this.totalPage = Math.ceil(this.listCount / Common.PAGE_SIZE);
 
-        objStatusList.forEach(element => {
+        statusList.forEach(element => {
           if (element) {
             let status = element.toString().split(',');
             // console.log('AllListComponent: ' + status[0] + ': ' + status[1] + '\n');
@@ -34,7 +47,7 @@ export class AllListComponent implements OnInit {
           }
         });
 
-        objTypeList.forEach(element => {
+        typeList.forEach(element => {
           if (element) {
             let type = element.toString().split(',');
             // console.log('AllListComponent: ' + type[0] + ': ' + type[1] + '\n');
@@ -42,7 +55,7 @@ export class AllListComponent implements OnInit {
           }
         });
 
-        objAssetList.forEach(element => {
+        assetList.forEach(element => {
           if (element) {
             let assetViewModel: AssetViewModel = {
               id: element.id,
@@ -65,6 +78,34 @@ export class AllListComponent implements OnInit {
         });
       }
     });
+  }
+
+  onFirstClick(): void {
+    this.currentPage = 1;
+    this.updateAllList();
+  }
+
+  onLastClick(): void {
+    this.currentPage = this.totalPage;
+    this.updateAllList();
+  }
+
+  onPreviousClick(): void {
+    --this.currentPage;
+    this.updateAllList();
+  }
+
+  onNextClick(): void {
+    ++this.currentPage;
+    this.updateAllList();
+  }
+
+  hasNextPage(): boolean {
+    return !(this.currentPage * Common.PAGE_SIZE >= this.totalPage);
+  }
+
+  hasPreviousPage(): boolean {
+    return (this.currentPage * Common.PAGE_SIZE > Common.PAGE_SIZE);
   }
 
 }

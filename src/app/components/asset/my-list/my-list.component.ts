@@ -10,6 +10,7 @@ import { AppComponent } from 'src/app/app.component';
 import { User } from '../../../shared/types/user';
 import { Message } from '../../../shared/types/message';
 import { Asset } from 'src/app/shared/types/asset';
+import { Common } from 'src/app/shared/common';
 
 @Component({
   selector: 'app-my-list',
@@ -22,23 +23,34 @@ export class MyListComponent implements OnInit {
   assetList: Asset[] = [];
   assignFormList: FormGroup[] = [];
 
+  // pagination, NOTE: pagination is by 10 in server side and can't be set from client
+  listCount: number = 0;
+  currentPage: number = 1;
+  totalPage: number = 1;
+
   constructor(private assetService: AssetService, private messageService: MessageService, private appComponent: AppComponent) { }
 
   ngOnInit(): void {
-    this.assetService.getMyAssetList().subscribe({
+    this.updateMyList();
+  }
+
+  updateMyList(): void {
+    this.assetService.getMyAssetList(this.currentPage).subscribe({
       next: (v) => {
         // console.log('MyListComponent: ' + JSON.stringify(v));
-        let objUserList: User[] = JSON.parse(JSON.parse(JSON.stringify(v)).user_list);
-        let objAssetList: Asset[] = JSON.parse(JSON.parse(JSON.stringify(v)).asset_list);
+        let userList: User[] = JSON.parse(JSON.parse(JSON.stringify(v)).user_list);
+        let assetList: Asset[] = JSON.parse(JSON.parse(JSON.stringify(v)).asset_list);
+        this.listCount = JSON.parse(JSON.parse(JSON.stringify(v)).count);
+        this.totalPage = Math.ceil(this.listCount / Common.PAGE_SIZE);
 
-        objAssetList.forEach(element => {
+        assetList.forEach(element => {
           if (element) {
             this.assetList.push(element);
             console.log('MyListComponent: id ' + element.id + ':' + element.user + ':' + element.next_user + ','  + element.name);
           }
         });
 
-        objUserList.forEach(element => {
+        userList.forEach(element => {
           if (element && element.id != this.appComponent.user.id) {
             this.userList.push(element);
           }
@@ -64,6 +76,34 @@ export class MyListComponent implements OnInit {
       // update local data
       this.assetList[index].next_user = this.assignFormList[index].get('user')?.value;
     });
+  }
+
+  onFirstClick(): void {
+    this.currentPage = 1;
+    this.updateMyList();
+  }
+
+  onLastClick(): void {
+    this.currentPage = this.totalPage;
+    this.updateMyList();
+  }
+
+  onPreviousClick(): void {
+    --this.currentPage;
+    this.updateMyList();
+  }
+
+  onNextClick(): void {
+    ++this.currentPage;
+    this.updateMyList();
+  }
+
+  hasNextPage(): boolean {
+    return !(this.currentPage * Common.PAGE_SIZE >= this.totalPage);
+  }
+
+  hasPreviousPage(): boolean {
+    return (this.currentPage * Common.PAGE_SIZE > Common.PAGE_SIZE);
   }
 
 }
