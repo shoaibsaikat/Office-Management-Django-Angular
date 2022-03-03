@@ -1,6 +1,8 @@
 # Angular-Office-Management
 Angular frontend for Django-Office-Management-BackEnd repository
 
+Backend project link: https://github.com/shoaibsaikat/Django-Office-Management-BackEnd
+
 # AngularOfficeManagement
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.10.
