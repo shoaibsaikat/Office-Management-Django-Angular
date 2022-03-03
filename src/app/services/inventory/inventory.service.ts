@@ -21,7 +21,6 @@ export class InventoryService {
   };
 
   private baseUrl: string = this.common.getBaseUrl().concat('inventory/');
-  private listUrl: string = this.baseUrl.concat('?page=1');
   private chartlistUrl: string = this.baseUrl.concat('inventory_list/');
   private quickEditUrl: string = this.baseUrl.concat('quick_edit/');
   private createUrl: string = this.baseUrl.concat('create/');
@@ -29,8 +28,9 @@ export class InventoryService {
 
   constructor(private http: HttpClient) { }
 
-  getInventoryList(): Observable<string> {
-    return this.http.get<string>(this.listUrl, this.common.getHttpHeader());
+  getInventoryList(page: number = 1): Observable<string> {
+    let listUrl = this.baseUrl.concat('?page=' + page);
+    return this.http.get<string>(listUrl, this.common.getHttpHeader());
   }
 
   getInventoryChartList(): Observable<string> {

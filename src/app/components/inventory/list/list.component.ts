@@ -7,8 +7,9 @@ import { MessageService } from 'src/app/services/message/message.service';
 
 import { AppComponent } from 'src/app/app.component';
 
-import { Message } from '../../../shared/types/message';
+import { Message } from 'src/app/shared/types/message';
 import { Inventory } from 'src/app/shared/types/inventory';
+import { Common } from 'src/app/shared/common';
 
 
 @Component({
@@ -21,10 +22,19 @@ export class ListComponent implements OnInit {
   inventoryList: Inventory[] = [];
   inventoryFormList: FormGroup[] = [];
 
+  // pagination, NOTE: pagination is by 10 in server side and can't be set from client
+  listCount: number = 0;
+  currentPage: number = 1;
+  totalPage: number = 1;
+
   constructor(private inventoryService: InventoryService, private messageService: MessageService, private appComponent: AppComponent) { }
 
   ngOnInit(): void {
-    this.inventoryService.getInventoryList().subscribe({
+    this.updateInventoryList();
+  }
+
+  updateInventoryList(): void {
+    this.inventoryService.getInventoryList(this.currentPage).subscribe({
       next: (v) => {
         // console.log('ListComponent: ' + JSON.stringify(v));
         let objInventoryList: Inventory[] = JSON.parse(JSON.parse(JSON.stringify(v)).inventory_list);
@@ -67,6 +77,34 @@ export class ListComponent implements OnInit {
   onClick(item: Inventory): void {
     this.inventoryService.setCurrentInventory(item);
     this.appComponent.navigate('inventory/edit');
+  }
+
+  onFirstClick(): void {
+    this.currentPage = 1;
+    this.updateInventoryList();
+  }
+
+  onLastClick(): void {
+    this.currentPage = this.totalPage;
+    this.updateInventoryList();
+  }
+
+  onPreviousClick(): void {
+    --this.currentPage;
+    this.updateInventoryList();
+  }
+
+  onNextClick(): void {
+    ++this.currentPage;
+    this.updateInventoryList();
+  }
+
+  hasNextPage(): boolean {
+    return !(this.currentPage * Common.PAGE_SIZE >= this.totalPage);
+  }
+
+  hasPreviousPage(): boolean {
+    return (this.currentPage * Common.PAGE_SIZE > Common.PAGE_SIZE);
   }
 
 }
