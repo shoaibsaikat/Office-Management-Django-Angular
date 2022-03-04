@@ -1,24 +1,26 @@
-import { Component } from '@angular/core';
-
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+
+import { Observable } from 'rxjs';
 
 import { User } from './shared/types/user';
 
 import { MessageService } from './services/message/message.service';
+import { LoadingService } from './services/loading/loading.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
   title = 'Office Management';
   user: User = this.getEmptyUser();
   errorMsg: string = '';
 
-  constructor(private router: Router, private messageService: MessageService) {
+  constructor(private router: Router, private messageService: MessageService, private loadingService: LoadingService) {
     this.loadCurrentUser();
   }
 
@@ -109,6 +111,10 @@ export class AppComponent {
 
   navigate(path: string): void {
     this.router.navigate([path]);
+  }
+
+  isLoading(): Observable<boolean> {
+    return this.loadingService.isLoading();
   }
 
 }

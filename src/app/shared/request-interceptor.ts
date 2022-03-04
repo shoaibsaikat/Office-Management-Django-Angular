@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { Message } from './types/message';
 
 import { MessageService } from '../services/message/message.service';
+import { LoadingService } from '../services/loading/loading.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,12 +15,16 @@ import { MessageService } from '../services/message/message.service';
 
 export class RequestInterceptor implements HttpInterceptor {
 
-  constructor(private messageService: MessageService) { }
+  private totalRequests = 0;
+
+  constructor(private messageService: MessageService, private loadingService: LoadingService) { }
 
   // global http error interceptor
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(req).pipe(
-      tap({
+    this.totalRequests++;
+    this.loadingService.setLoading();
+
+    return next.handle(req).pipe(tap({
           // Operation failed; error is an HttpErrorResponse
           error: (error) => {
             if (error instanceof HttpErrorResponse) {
@@ -33,7 +38,12 @@ export class RequestInterceptor implements HttpInterceptor {
                 this.messageService.addError(error.status + ': ' + error.name + ', ' + error.statusText);
               }
             }
-          }
+          }, finalize: () => {
+            this.totalRequests--;
+            if (this.totalRequests === 0) {
+              this.loadingService.unsetLoading();
+            }
+          },
         }),
       );
   }

@@ -59,6 +59,7 @@
       <!-- end: left pane -->
       <!-- content body -->
       <div class="col-md-8">
+        <app-loading class="spinner" *ngIf="isLoading() | async"></app-loading>
         <router-outlet></router-outlet>
         <br><br>
         <app-message></app-message>
