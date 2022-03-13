@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { AppComponent } from 'src/app/app.component';
-
+import { GlobalService } from 'src/app/services/global/global.service';
 import { AccountService } from '../../../services/account/account.service';
 import { MessageService } from 'src/app/services/message/message.service';
 
@@ -16,7 +15,10 @@ import { User } from 'src/app/shared/types/user';
 })
 export class SigninComponent implements OnInit {
 
-  constructor(private appComponent: AppComponent, private accountService: AccountService, private messageService: MessageService) { }
+  constructor(
+    private globalService: GlobalService,
+    private accountService: AccountService,
+    private messageService: MessageService) { }
 
   ngOnInit(): void {
   }
@@ -26,9 +28,9 @@ export class SigninComponent implements OnInit {
     this.accountService.logIn(logIn).subscribe({
       next: (v) => {
         let user: User = v;
-        this.appComponent.setCurrentUser(user);
-        this.appComponent.saveCurrentUser();
-        this.appComponent.navigate('');
+        this.globalService.setCurrentUser(user);
+        this.globalService.saveCurrentUser();
+        this.globalService.navigate('');
         this.messageService.clearAll();
       }
     });
