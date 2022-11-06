@@ -34,10 +34,5 @@ Note:
 3. To generate requirements.txt file -> pip freeze > requirements.txt or conda list -e > requirements.txt and to create a new environment pip install -r requirements.txt or conda create --name <env_name> --file requirements.txt
 4. to update all packages -> conda update -all
 
-
-# Angular-Office-Management
-Angular frontend for Django-Office-Management-BackEnd repository
-
-# Authentication
-Default Django REST framework authentication is used.
-
+Frontend Project:
+1. https://github.com/shoaibsaikat/Angular-Office-Management
