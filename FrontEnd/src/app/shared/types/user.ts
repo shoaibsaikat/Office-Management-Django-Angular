@@ -10,4 +10,8 @@ export interface User {
     can_approve_inventory?: boolean;
     can_approve_leave?: boolean;
     can_manage_asset?: boolean;
+    type: number;
+    phone1: number;
+    phone2: number;
+    image: string;
 }

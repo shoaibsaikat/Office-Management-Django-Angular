@@ -23,6 +23,7 @@ export class AccountService {
   private profileUrl: string = this.baseUrl.concat('change_profile/');
   private managerUrl: string = this.baseUrl.concat('change_manager/');
   private passwordUrl: string = this.baseUrl.concat('change_password/');
+  private userUrl: string = this.baseUrl.concat('get/');
 
   constructor(private http: HttpClient) { }
 
@@ -35,6 +36,10 @@ export class AccountService {
 
   logOut(): Observable<Message> {
     return this.http.post<Message>(this.logOutUrl, null, this.common.getHttpHeader());
+  }
+
+  getUserInfo(): Observable<User> {
+    return this.http.get<User>(this.userUrl, this.common.getHttpHeader());
   }
 
   changeInfo(user: User): Observable<Message> {

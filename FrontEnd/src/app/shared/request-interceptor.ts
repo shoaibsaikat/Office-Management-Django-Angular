@@ -15,7 +15,7 @@ import { LoadingService } from '../services/loading/loading.service';
 
 export class RequestInterceptor implements HttpInterceptor {
 
-  private totalRequests = 0;
+  private totalRequests: number = 0;
 
   constructor(private messageService: MessageService, private loadingService: LoadingService) { }
 

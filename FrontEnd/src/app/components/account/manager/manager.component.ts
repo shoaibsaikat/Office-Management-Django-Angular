@@ -19,13 +19,14 @@ export class ManagerComponent implements OnInit {
     manager: new FormControl(),
   });
   currentManger: number = -1;
+  currentManagerName: string = "";
 
   constructor(private globalService: GlobalService, private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.getMangerList();
     this.currentManger = this.globalService.getUser().manager_id || -1;
-    // console.log('ManagerComponent: current ' + this.currentManger);
+    // console.log('ManagerComponent: current ' + this.currentManagerName);
   }
 
   getMangerList(): void {
@@ -37,6 +38,10 @@ export class ManagerComponent implements OnInit {
           if (element && element.id != this.currentManger) {
             this.managerList.push(element);
             // console.log('ManagerComponent: id ' + element.id + ' '  + element.first_name);
+          } else {
+            // save current manager name
+            this.currentManagerName = element.first_name + ' ' + element.last_name;
+            // console.log('ManagerComponent: ' + this.currentManagerName);
           }
         });
       }
