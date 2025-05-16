@@ -8,4 +8,4 @@ Default Django REST framework authentication is used.
 
 # Migration
 
-- npm install --save-dev @angular/cli@<version>
+- ng update @angular/core@16 @angular/cli@<major-version>
