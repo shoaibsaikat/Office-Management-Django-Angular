@@ -1,4 +1,6 @@
-# Django-Office-Management-BackEnd
+# Django-Office-Management
+
+# BackEnd
 A simple office management system using Django.
 Office Management System using Django Backend with REST api support using Django REST Framework.
 It can be consumed by different front-ends like Angular, React or Vue.js.
@@ -34,10 +36,19 @@ Note:
 3. To generate requirements.txt file -> pip freeze > requirements.txt or conda list -e > requirements.txt and to create a new environment pip install -r requirements.txt or conda create --name <env_name> --file requirements.txt
 4. to update all packages -> conda update -all
 
-
-# Angular-Office-Management
-Angular frontend for Django-Office-Management-BackEnd repository
-
 # Authentication
 Default Django REST framework authentication is used.
+
+######################################################
+
+# FrontEnd
+
+# Installation
+- npm uninstall -g @angular/cli
+- npm cache clean --force
+- npm install -g @angular/cli@15.2.10
+- npm install --legacy-peer-deps
+
+# Run
+- ng serve
 
