@@ -22,7 +22,7 @@
     "@angular/router": "^19.2.11",
     "@schematics/angular": "^15.2.4",
     "ajv": "^8.9.0",
-    "angular-google-charts": "^2.2.4",
+    "angular-google-charts": "^16.0.2",
     "bootstrap": "^5.1.3",
     "http-cache-semantics": "^4.1.1",
     "jquery": "^3.6.0",
